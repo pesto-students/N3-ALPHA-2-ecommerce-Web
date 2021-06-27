@@ -1,0 +1,14 @@
+@import '../../shared/Style/index';
+
+.filters{
+    width: 268px;
+    min-height: 200px;
+    background-color:$cardBackground;
+    padding: 20px 40px;
+
+    &_title{
+        font-size: $titleSize;
+        font-weight: bold;
+        margin: 0px;
+    }
+}

@@ -1,0 +1,86 @@
+@import '../../shared/Style/index';
+
+// Banner
+.banner {
+    position: relative;
+    &_img {
+        width: 100%;
+        display: block;
+        max-height: 400px;
+    }
+    &_content {
+        position: absolute;
+        top: 0;
+        left: 8%;
+        height: 100%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: $white;
+        text-align: left;
+    }
+
+    &_head {
+        font-size: 3rem;
+        margin: 0;
+        color: $white;
+        line-height: 1.2;
+    }
+
+    &_text {
+        font-size: 1.8rem;
+    }
+
+    &_btn {
+        @include hyGenieBtn;
+        width: 28%;
+        text-align: center;
+        text-decoration: none;
+    }
+}
+
+// New Arrivals
+.newArrivals {
+    @include sectionPadding;
+    &_heading {
+        @include sectionHeading;
+    }
+    &_content {
+        @include sectionWidth;
+        display: flex;
+    }
+    &_list {
+        @include productCard;
+        &-img {
+            max-height: 200px;
+        }
+    }
+}
+
+// for mobile device
+@media (max-width: $mediaTabMax) {
+    .banner {
+        &_img {
+            display: none;
+        }
+        &_content {
+            width: 100%;
+            position: static;
+            background: $black-343A40;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        &_head {
+            font-size: 2rem;
+        }
+        &_text {
+            font-size: 1.4rem;
+        }
+    }
+    .newArrivals {
+        &_content {
+            flex-wrap: wrap;
+        }
+    }
+}

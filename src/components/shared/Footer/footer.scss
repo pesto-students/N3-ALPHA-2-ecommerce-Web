@@ -1,0 +1,13 @@
+@import '../../shared/Style/index';
+
+.footer {
+    background: $black-343A40;
+    padding: $padding;
+    margin-top: 4rem;
+    &_content{
+        @include sectionWidth;
+    }
+    &_text {
+        color: $grey-bbb;
+    }
+}

@@ -1,0 +1,32 @@
+@import '../../shared/Style/index';
+
+.products{
+    @include sectionWidth;
+    margin-top: $topSpacing;
+
+
+    &_header{
+       p{
+           margin-bottom: 16px;
+       }
+    }
+
+    &_section{
+        margin-top: 40px;
+        display: flex;
+    }
+
+    &_list{
+        margin-left: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        // .product-item {
+        //     width: 31.5%;
+        //     margin-bottom: 1.5rem;
+        //     &:nth-child(3n) {
+        //         margin-right: 0;
+        //     }
+        // }
+    }
+}

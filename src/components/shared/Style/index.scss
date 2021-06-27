@@ -1,0 +1,160 @@
+// this file will contain all the color variables, mixins etc
+$primary-color: #5f9fa4;
+$secondary-color: #251e60;
+$white: #fff;
+$grey_ccc: #ccc;
+$grey-e5e5e5: #e5e5e5;
+$headerShadow: #0000004d;
+$black-333: #333;
+$grey-aaa: #aaa;
+$grey-bbb: #bbb;
+$black-343A40: #343a40;
+$margin: 16px;
+$padding: 16px;
+$paddingMd: 12px;
+$borderRadius: 4px;
+$topSpacing: 80px;
+$cardBackground: #f9f9f9;
+
+// Font sizes
+$titleSize: 18px;
+
+// media queries
+$mediaMobileMin: 320px;
+$mediaMobileMax: 480px;
+$mediaTabMin: 481px;
+$mediaTabMax: 768px;
+$mediaLaptopMin: 769px;
+$mediaLaptopMax: 1024px;
+
+// default tag css
+img {
+    max-width: 100%;
+}
+
+// sample mixins now this mixins can be used using @include sample
+@mixin formField {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 10px;
+    border-radius: $borderRadius;
+    border: 1px solid $grey_ccc;
+    margin-bottom: 16px;
+}
+
+@mixin hyGenieBtn {
+    padding: 10px 16px;
+    white-space: nowrap;
+    background-image: linear-gradient(
+        to right,
+        $primary-color,
+        $secondary-color
+    );
+    transition: all 0.5s ease;
+    margin: 0;
+    color: $white;
+    border-radius: $borderRadius;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+@mixin sectionWidth {
+    width: 85%;
+    margin: auto;
+    @media (max-width: $mediaTabMax) {
+        width: 92%;
+    }
+}
+
+@mixin sectionMargin {
+    margin-top: 2rem;
+}
+
+@mixin sectionHeading {
+    font-size: 1.6rem;
+    margin-top: 0;
+    color: $black-333;
+    @include sectionWidth;
+    text-align: left;
+    margin-bottom: 1.2rem;
+    @media (max-width: $mediaTabMax) {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@mixin sectionPadding {
+    padding-top: 2.5rem;
+    @media (max-width: $mediaTabMax) {
+        padding-top: 1.4rem;
+    }
+}
+
+@mixin productCard {
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 1px 1px 10px -1px $grey-aaa;
+    margin-right: 1.5rem;
+    border-radius: 0 0 $borderRadius $borderRadius;
+    border-top: 3px solid $primary-color;
+    padding: $padding;
+    transition: all 0.4s;
+    text-decoration: none;
+    position: relative;
+    margin-bottom: 30px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        max-height: 200px;
+        max-width: 200px;
+        object-fit: contain;
+    }
+
+    &:hover {
+        transform: scale(1.02);
+        transition: all 0.4s;
+    }
+    &:last-child {
+        margin-right: 0;
+    }
+    @media (max-width: $mediaTabMax) {
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+}
+
+@mixin h4 {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+@mixin h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+// Error toaster custom css
+#notification-wrapper {
+    .toast-notification {
+        width: 100% !important;
+        span {
+            width: 100% !important;
+            font-weight: bold !important;
+        }
+    }
+}
+
+.main-content {
+    min-height: calc(100vh - 350px);
+}
+
+// For mobile device
+@media (max-width: $mediaTabMax) {
+}

@@ -1,0 +1,108 @@
+@import '../../shared/Style/index';
+
+.cartDetail {
+    height: auto;
+    max-height: 80vh;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background: $white;
+    overflow-x: hidden;
+    transition: all 0.5s;
+    box-shadow: 1px 1px 10px -1px $grey-aaa;
+    &.hide {
+        width: 0;
+    }
+    &.show {
+        width: 33%;
+        padding: 16px;
+        border-radius: 0 0 $borderRadius $borderRadius;
+        .cartDetail_top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid $grey_ccc;
+            padding-bottom: $paddingMd;
+            font-weight: bold;
+            &.amount {
+                border-bottom: 0;
+                border-top: 1px solid $grey_ccc;
+                padding-top: $paddingMd;
+                justify-content: space-around;
+                font-size: 1.2rem;
+                margin-top: $margin;
+            }
+        }
+        .cartDetail_closeBtn {
+            margin: 0;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+    }
+    &_checkoutBtn {
+        @include hyGenieBtn();
+        display: inline-block;
+        margin-top: $margin;
+    }
+}
+
+.cartItem {
+    padding: $paddingMd;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &_link {
+        width: 20%;
+    }
+    &_detail {
+        width: 40%;
+    }
+    &_text {
+        margin: 0;
+        font-size: 0.9rem;
+        color: $black-333;
+        font-weight: bold;
+    }
+    &_price {
+        margin: 0;
+        font-size: 0.9rem;
+        color: $black-333;
+        font-weight: bold;
+        width: 20%;
+    }
+    &_qty {
+        padding: $paddingMd;
+        display: inline-block;
+    }
+    &_btn {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        color: $secondary-color;
+        background-color: $grey-e5e5e5;
+        cursor: pointer;
+        font-weight: bold;
+        border: 1px solid $primary-color;
+        &:hover {
+            color: $primary-color;
+        }
+    }
+    &_remove {
+        width: 20%;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0;
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+@media (max-width: $mediaTabMax) {
+    .cartDetail {
+        &.show {
+            width: 100%;
+        }
+    }
+}

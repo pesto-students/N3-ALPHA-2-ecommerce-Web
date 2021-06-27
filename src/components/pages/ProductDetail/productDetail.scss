@@ -1,0 +1,90 @@
+@import '../../shared/Style/index.scss';
+
+.product-detailed {
+    @include sectionWidth();
+
+    margin-top: $topSpacing;
+
+    &_product_section {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &_thumbnails {
+        display: flex;
+        flex-direction: column;
+
+        &_item {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 30px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 8px 0px;
+            border-radius: $borderRadius;
+            cursor: pointer;
+        }
+
+        .selected {
+            transform: scale(1.1);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 12px 0px;
+        }
+    }
+    &_preview {
+        width: 100%;
+        height: 100%;
+        max-width: 568px;
+        max-height: 440px;
+        object-fit: contain;
+        margin-left: 40px;
+    }
+    &_details {
+        max-width: 310px;
+        text-align: left;
+        margin-left: 72px;
+        &_name {
+            @include h4();
+        }
+
+        &_price {
+            &_new {
+                @include h2();
+            }
+            span {
+                font-size: 20px;
+                color: rgb(135, 135, 135);
+                margin-left: 10px;
+                font-weight: normal;
+            }
+        }
+
+        &_count {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        &_description {
+            margin-top: 10px;
+        }
+
+        &_btn {
+            @include hyGenieBtn;
+            margin-top: 40px;
+        }
+    }
+
+    &_similar_section {
+        margin-top: $topSpacing;
+        text-align: left;
+
+        &_products {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+    &_details_share {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        z-index: 2;
+    }
+}

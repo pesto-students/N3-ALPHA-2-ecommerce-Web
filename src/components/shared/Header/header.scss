@@ -1,0 +1,273 @@
+@import '../../shared/Style/index';
+
+.header {
+    box-sizing: border-box;
+    box-shadow: 0 0 5px $headerShadow;
+    transition: all 0.4s ease;
+    transform: translate(0, 0);
+    z-index: 9;
+    position: relative;
+    width: 100%;
+    background: $white;
+    &.fixed {
+        z-index: 9;
+        position: fixed;
+        top: 14px;
+        transform: translate(0, -14px);
+    }
+    &_logo {
+        width: 22%;
+        text-align: left;
+        &-img {
+            max-width: 185px;
+        }
+    }
+
+    &_topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $paddingMd 20px 0;
+        @include sectionWidth;
+    }
+
+    &_search {
+        @include formField;
+        padding: $paddingMd;
+        width: 100%;
+        margin-bottom: 0;
+
+        &_form {
+            width: 46%;
+        }
+    }
+    &_login {
+        cursor: pointer;
+        position: relative;
+        &-icon {
+            max-width: 30px;
+        }
+        &-text {
+            font-weight: bold;
+            padding-left: 6px;
+        }
+    }
+    &_signUp {
+        color: $primary-color;
+        cursor: pointer;
+        font-weight: bold;
+
+        &-social {
+            background: $secondary-color;
+            padding: $paddingMd;
+            border-radius: $borderRadius;
+            color: $white;
+            font-weight: bold;
+            cursor: pointer;
+
+            .socialIcon {
+                width: 15px;
+                vertical-align: middle;
+                margin-right: 16px;
+            }
+        }
+    }
+
+    // menu css here
+    .menu {
+        padding-bottom: $paddingMd;
+        &_item {
+            margin: 0;
+            display: inline-block;
+            padding: $padding;
+            font-weight: bold;
+            cursor: pointer;
+            vertical-align: top;
+            position: relative;
+
+            &:hover {
+                color: $primary-color;
+                &::after {
+                    width: 100%;
+                    transition: all 0.5s;
+                }
+            }
+
+            &::after {
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 0;
+                content: '.';
+                color: transparent;
+                background: $primary-color;
+                height: 2px;
+            }
+
+            &_selected {
+                color: $primary-color;
+                &::after {
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 100%;
+                    content: '.';
+                    color: transparent;
+                    background: $primary-color;
+                    height: 2px;
+                }
+            }
+        }
+        .menuBar {
+            display: none;
+        }
+    }
+    .mobileMenu {
+        display: none;
+    }
+    .mobileMenu_search {
+        display: none;
+    }
+    &_cart {
+        color: $black-333;
+        font-weight: bold;
+        cursor: pointer;
+        &-icon {
+            max-width: 30px;
+        }
+    }
+}
+
+// user menu
+.userMenu {
+    box-shadow: 0 12px 15px 0 $headerShadow;
+    padding: $paddingMd;
+    text-align: left;
+    border-radius: $borderRadius;
+    position: absolute;
+    background: $white;
+    left: 0;
+    width: 100%;
+    display: none;
+    &_item {
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        padding-bottom: 6px;
+        color: $black-333;
+        font-weight: 500;
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+.header_login:hover .userMenu {
+    display: block;
+}
+
+.loginOverlay {
+    background: none;
+    &_modal {
+        width: 300px;
+        border-radius: $borderRadius;
+        position: absolute;
+        top: 3.6rem;
+        right: 10rem;
+        border: 1px solid $grey-e5e5e5;
+        text-align: center;
+        padding: $padding;
+        margin: 0;
+        .loginRegForm {
+            &_head {
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+// For mobile device
+@media (max-width: $mediaTabMax) {
+    .loginOverlay {
+        &_modal {
+            right: 1.4rem;
+        }
+    }
+    .header {
+        padding-bottom: $paddingMd;
+        &_logo {
+            width: 30%;
+            text-align: left;
+            &-img {
+                max-width: 100px;
+            }
+        }
+        &_search_form {
+            display: none;
+        }
+        .menu {
+            display: none;
+        }
+        .mobileMenu {
+            display: block;
+            &_content {
+                height: 100vh;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-image: linear-gradient(
+                    to right,
+                    $primary-color 70%,
+                    $white 30%
+                );
+                overflow-x: hidden;
+                transition: 0.5s;
+                &.hide {
+                    width: 0;
+                }
+                &.show {
+                    width: 100%;
+                }
+            }
+            &_item {
+                color: $white;
+                text-align: left;
+                padding: 16px;
+                border-bottom: 1px solid $white;
+                margin: 0;
+                font-weight: bold;
+            }
+            &_menuBar {
+                font-size: 2rem;
+            }
+            &_closeBtn {
+                font-size: 2rem;
+                color: $secondary-color;
+                position: absolute;
+                right: 15px;
+                top: 0;
+                margin: 0;
+            }
+            &_search {
+                display: block;
+                @include formField;
+                @include sectionWidth;
+                padding: $paddingMd;
+            }
+        }
+        &_search {
+            display: none;
+        }
+        &_topbar {
+            padding: $paddingMd 0;
+        }
+        &_login {
+            font-size: 0.8em;
+            width: auto;
+        }
+    }
+}
