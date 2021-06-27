@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Divider from '../../shared/Divider/Divider';
 import Filters from '../../shared/Filters/Filters';
 import ProductItem from '../../shared/ProductItem/ProdcutItem';
@@ -27,27 +27,37 @@ function Products(props) {
         setProducts(filterProducts(filters, allProducts));
     };
 
+    useEffect(() => {
+        setProducts(allProducts);
+    }, [allProducts]);
+
     return (
-        <div className="products">
-            <div className="products_header">
-                <p align="right">{`${products.length} items`}</p>
-                <Divider />
-            </div>
-            <section className="products_section">
-                <Filters onFiltersChange={handleFiltersChange} />
-                <div className="products_list">
-                    {products.map(({ id, name, thumbnail, price }) => (
-                        <ProductItem
-                            key={id}
-                            id={id}
-                            name={name}
-                            img={`assets/${thumbnail}`}
-                            price={price}
-                        />
-                    ))}
+        <Fragment>
+            {products.length > 0 ? (
+                <div className="products">
+                    <div className="products_header">
+                        <p align="right">{`${products.length} items`}</p>
+                        <Divider />
+                    </div>
+                    <section className="products_section">
+                        <Filters onFiltersChange={handleFiltersChange} />
+                        <div className="products_list">
+                            {products.map(({ id, name, thumbnail, price }) => (
+                                <ProductItem
+                                    key={id}
+                                    id={id}
+                                    name={name}
+                                    img={`assets/${thumbnail}`}
+                                    price={price}
+                                />
+                            ))}
+                        </div>
+                    </section>
                 </div>
-            </section>
-        </div>
+            ) : (
+                'Loading...'
+            )}
+        </Fragment>
     );
 }
 
