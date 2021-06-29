@@ -54,6 +54,7 @@ export const setName = (name, user) => {
 export const logOut = () => {
     auth.signOut();
     deleteLocalStorage('userDetails');
+    window.location.href = '/';
 };
 
 export default {};

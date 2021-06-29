@@ -7,6 +7,7 @@ import { filterProducts } from './productListing.helpers';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import './productListing.scss';
+import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 
 function Products(props) {
     const allProducts = useGetAllPRoducts();
@@ -55,7 +56,7 @@ function Products(props) {
                     </section>
                 </div>
             ) : (
-                'Loading...'
+                <FullPageLoader />
             )}
         </Fragment>
     );

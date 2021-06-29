@@ -1,0 +1,27 @@
+@import '../../shared/Style/index';
+
+.addressWrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: $margin;
+    &_area {
+        display: block;
+        resize: none;
+        pointer-events: none;
+        border: 0;
+        font-weight: 500;
+
+        &.editMode {
+            padding: $paddingMd;
+            border-radius: $borderRadius;
+            pointer-events: initial;
+            border: 1px solid $grey_ccc;
+        }
+    }
+    &_btn {
+        @include hyGenieBtn;
+        margin-left: $margin;
+        padding: 6px 16px;
+    }
+}
