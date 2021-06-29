@@ -94,10 +94,7 @@ const Header = (props) => {
                     />
                     {userDetails ? (
                         <Fragment>
-                            <span
-                                className="header_login-text"
-                                onClick={() => handleLoginClick()}
-                            >
+                            <span className="header_login-text">
                                 My Account
                             </span>
                             <div className="userMenu">

@@ -1,0 +1,122 @@
+@import '../../shared/Style/index';
+
+.account {
+    @include sectionWidth();
+    margin-top: $topSpacing;
+    &_content {
+        display: flex;
+        text-align: left;
+
+        &_tabs {
+            width: 20%;
+            background-color: $cardBackground;
+            height: 100vh;
+            padding: 20px 40px;
+
+            &_item {
+                list-style-type: none;
+                margin-bottom: $margin;
+                cursor: pointer;
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+        &_detail {
+            width: 80%;
+            margin-left: 40px;
+        }
+    }
+
+    // order history
+    .orderHistory {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid $grey_ccc;
+        &_img {
+            max-width: 130px;
+        }
+        &_content {
+            color: $black-333;
+            &_name {
+                @include h4;
+                margin-bottom: 0;
+            }
+            &_date {
+                margin-bottom: 0;
+                font-weight: bold;
+            }
+            &_price {
+                margin-bottom: 0;
+                font-weight: bold;
+            }
+            &_status {
+                display: flex;
+                &_wrap {
+                    margin: 0;
+                    margin-top: $margin;
+                    padding-left: $paddingMd;
+                    &:first-child {
+                        padding-left: 0;
+                    }
+                    &:last-child {
+                        .orderHistory_content_status_text {
+                            &::after {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                &_step {
+                    border: 1px solid $primary-color;
+                    color: $black-333;
+                    border-radius: 50%;
+                    width: 20px;
+                    height: 20px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    &.active {
+                        background: $primary-color;
+                        color: $white;
+                    }
+                }
+                &_text {
+                    display: inline-block;
+                    padding-right: 80px;
+                    position: relative;
+                    &::after {
+                        content: '';
+                        width: 70px;
+                        height: 2px;
+                        background: $black-333;
+                        position: absolute;
+                        bottom: 9px;
+                        right: 0;
+                    }
+                }
+            }
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    //Basic Info
+    .basicInfo {
+        padding: 20px 0;
+        &_info {
+            display: flex;
+            &_label {
+                width: 150px;
+            }
+            &_value {
+                font-weight: 500;
+            }
+        }
+        &_btn {
+            @include hyGenieBtn;
+        }
+    }
+}

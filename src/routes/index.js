@@ -6,7 +6,7 @@ import {
     Switch,
 } from 'react-router-dom';
 const Container = lazy(() => import('../components/shared/Container/'));
-const Account = lazy(() => import('../components/pages/Account/'));
+const Account = lazy(() => import('../components/pages/Account/Account'));
 const Home = lazy(() => import('../components/pages/Home/HomeContainer'));
 const Products = lazy(() =>
     import('../components/pages/ProductListing/ProductListing')
