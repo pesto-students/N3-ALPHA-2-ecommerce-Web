@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getLocalStorage } from '../../../helper/Utils';
 import Address from '../../shared/Address/Address';
 import AddAddress from '../../shared/Address/AddAddress';

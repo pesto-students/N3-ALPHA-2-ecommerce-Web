@@ -6,12 +6,12 @@
     &_img {
         width: 100%;
         display: block;
-        max-height: 400px;
+        height: 400px;
     }
     &_content {
         position: absolute;
         top: 0;
-        left: 8%;
+        left: 10%;
         height: 100%;
         width: 30%;
         display: flex;
@@ -49,6 +49,9 @@
     &_content {
         @include sectionWidth;
         display: flex;
+        .product-item {
+            width: 25%;
+        }
     }
     &_list {
         @include productCard;
@@ -58,8 +61,65 @@
     }
 }
 
-// for mobile device
+// desktop and ipad pro
+@media only screen and (min-width: $mediaLaptopMin) and (max-width: $mediaLaptopMax) {
+    .banner {
+        &_img {
+            height: 320px;
+        }
+        &_content {
+            width: 40%;
+            left: 4%;
+        }
+    }
+}
+
+// for  tablets
 @media (max-width: $mediaTabMax) {
+    .banner {
+        &_img {
+            height: 260px;
+        }
+        &_content {
+            width: 40%;
+            left: 4%;
+        }
+        &_head {
+            font-size: 2rem;
+        }
+        &_text {
+            font-size: 1.4rem;
+        }
+        &_btn {
+            width: 32%;
+        }
+    }
+    .newArrivals {
+        &_content {
+            flex-wrap: wrap;
+            .product-item {
+                width: 48.8%;
+                margin-right: $margin;
+                &:nth-child(even) {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 720px) {
+    .newArrivals {
+        &_content {
+            .product-item {
+                width: 48%;
+            }
+        }
+    }
+}
+
+// for mobile device
+@media (max-width: $mediaTabMin) {
     .banner {
         &_img {
             display: none;
@@ -77,10 +137,17 @@
         &_text {
             font-size: 1.4rem;
         }
+        &_btn {
+            width: auto;
+        }
     }
     .newArrivals {
         &_content {
             flex-wrap: wrap;
+            .product-item {
+                width: 100%;
+                margin-right: 0;
+            }
         }
     }
 }

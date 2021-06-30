@@ -40,18 +40,20 @@ const ManageAddress = () => {
                     >
                         {address}
                     </textarea>
-                    <button
-                        className="addressWrap_btn"
-                        onClick={() => handleSave()}
-                    >
-                        Save
-                    </button>
-                    <button
-                        className="addressWrap_btn"
-                        onClick={() => handleCancel()}
-                    >
-                        Cancel
-                    </button>
+                    <div className="addressWrap_btnWrap">
+                        <button
+                            className="addressWrap_btn"
+                            onClick={() => handleSave()}
+                        >
+                            Save
+                        </button>
+                        <button
+                            className="addressWrap_btn"
+                            onClick={() => handleCancel()}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <button

@@ -16,10 +16,10 @@
         transform: translate(0, -14px);
     }
     &_logo {
-        width: 22%;
+        width: 10%;
         text-align: left;
         &-img {
-            max-width: 185px;
+            max-width: 100px;
         }
     }
 
@@ -27,7 +27,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: $paddingMd 20px 0;
+        padding: $paddingMd 0px;
         @include sectionWidth;
     }
 
@@ -38,18 +38,21 @@
         margin-bottom: 0;
 
         &_form {
-            width: 46%;
+            width: 34%;
         }
     }
     &_login {
         cursor: pointer;
         position: relative;
+        width: 4%;
         &-icon {
-            max-width: 30px;
+            max-width: 24px;
         }
         &-text {
             font-weight: bold;
             padding-left: 6px;
+            font-size: 0.8rem;
+            display: block;
         }
     }
     &_signUp {
@@ -75,7 +78,7 @@
 
     // menu css here
     .menu {
-        padding-bottom: $paddingMd;
+        width: 44%;
         &_item {
             margin: 0;
             display: inline-block;
@@ -84,6 +87,9 @@
             cursor: pointer;
             vertical-align: top;
             position: relative;
+            &:first-child {
+                padding-left: 0;
+            }
 
             &:hover {
                 color: $primary-color;
@@ -136,8 +142,13 @@
         color: $black-333;
         font-weight: bold;
         cursor: pointer;
+        width: 4%;
         &-icon {
-            max-width: 30px;
+            max-width: 24px;
+        }
+        &-text {
+            font-size: 0.8rem;
+            display: block;
         }
     }
 }
@@ -150,8 +161,9 @@
     border-radius: $borderRadius;
     position: absolute;
     background: $white;
-    left: 0;
+    right: 0;
     width: 100%;
+    min-width: 100px;
     display: none;
     &_item {
         display: inline-block;
@@ -189,8 +201,130 @@
     }
 }
 
-// For mobile device
+// desktop and ipad pro
+@media only screen and (min-width: $mediaLaptopMin) and (max-width: $mediaLaptopMax) {
+    .header {
+        &_logo {
+            width: auto;
+            &-img {
+                max-width: 80px;
+            }
+        }
+        .menu {
+            width: 46%;
+            &_item {
+                padding: $paddingMd;
+            }
+        }
+        &_search {
+            &_form {
+                width: 32%;
+            }
+        }
+    }
+    .loginOverlay {
+        &_modal {
+            right: 2rem;
+        }
+    }
+}
+
+// for  tablets
 @media (max-width: $mediaTabMax) {
+    .loginOverlay {
+        &_modal {
+            right: 1.4rem;
+        }
+    }
+    .header {
+        &_logo {
+            width: 16%;
+            text-align: left;
+            &-img {
+                max-width: 100px;
+            }
+        }
+        &_search_form {
+            display: block;
+            width: 46%;
+        }
+        .menu {
+            display: none;
+        }
+        .mobileMenu {
+            display: block;
+            &_content {
+                height: 100vh;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-image: linear-gradient(
+                    to right,
+                    $primary-color 70%,
+                    $white 30%
+                );
+                overflow-x: hidden;
+                transition: 0.5s;
+                &.hide {
+                    width: 0;
+                }
+                &.show {
+                    width: 100%;
+                }
+            }
+            &_item {
+                color: $white;
+                text-align: left;
+                padding: 16px;
+                border-bottom: 1px solid $white;
+                margin: 0;
+                font-weight: bold;
+            }
+            &_menuBar {
+                font-size: 2rem;
+            }
+            &_closeBtn {
+                font-size: 2rem;
+                color: $secondary-color;
+                position: absolute;
+                right: 15px;
+                top: 0;
+                margin: 0;
+            }
+            &_search {
+                display: none;
+            }
+        }
+        &_search {
+            display: block;
+        }
+        &_topbar {
+            padding: $paddingMd 0;
+        }
+        &_login {
+            font-size: 0.8em;
+            width: auto;
+        }
+        &_cart {
+            width: auto;
+        }
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 720px) {
+    .header {
+        &_logo {
+            width: 20%;
+            &-img {
+                max-width: 80px;
+            }
+        }
+    }
+}
+
+// For mobile device
+@media (max-width: $mediaTabMin) {
     .loginOverlay {
         &_modal {
             right: 1.4rem;
@@ -254,9 +388,11 @@
             }
             &_search {
                 display: block;
-                @include formField;
-                @include sectionWidth;
-                padding: $paddingMd;
+                &_input {
+                    @include formField;
+                    @include sectionWidth;
+                    padding: 6px 12px;
+                }
             }
         }
         &_search {
@@ -267,6 +403,9 @@
         }
         &_login {
             font-size: 0.8em;
+            width: auto;
+        }
+        &_cart {
             width: auto;
         }
     }

@@ -63,8 +63,12 @@ img {
 }
 
 @mixin sectionWidth {
-    width: 85%;
+    width: 100%;
     margin: auto;
+    max-width: 1170px;
+    @media only screen and (min-width: $mediaLaptopMin) and (max-width: $mediaLaptopMax) {
+        width: 92%;
+    }
     @media (max-width: $mediaTabMax) {
         width: 92%;
     }
@@ -95,8 +99,6 @@ img {
 }
 
 @mixin productCard {
-    width: 100%;
-    max-width: 250px;
     box-shadow: 1px 1px 10px -1px $grey-aaa;
     margin-right: 1.5rem;
     border-radius: 0 0 $borderRadius $borderRadius;
@@ -105,6 +107,7 @@ img {
     transition: all 0.4s;
     text-decoration: none;
     position: relative;
+    text-align: center;
     margin-bottom: 30px;
 
     img {
@@ -152,9 +155,12 @@ img {
 }
 
 .main-content {
-    min-height: calc(100vh - 350px);
+    min-height: calc(100vh - 210px);
 }
 
 // For mobile device
 @media (max-width: $mediaTabMax) {
+    .main-content {
+        min-height: calc(100vh - 226px);
+    }
 }

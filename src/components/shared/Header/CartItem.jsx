@@ -9,7 +9,7 @@ const CartItem = ({ product }) => {
         <Fragment>
             <div className="cartItem">
                 <Link to={`/products/${id}`} className="cartItem_link">
-                    <img src={img} className="cartItem_img" alt={name} />
+                    <img src={`${img}`} className="cartItem_img" alt={name} />
                 </Link>
                 <div className="cartItem_detail">
                     <p className="cartItem_text">{name}</p>

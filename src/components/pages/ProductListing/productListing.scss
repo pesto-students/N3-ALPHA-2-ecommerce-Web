@@ -1,32 +1,111 @@
 @import '../../shared/Style/index';
 
-.products{
+.products {
     @include sectionWidth;
     margin-top: $topSpacing;
 
-
-    &_header{
-       p{
-           margin-bottom: 16px;
-       }
+    &_header {
+        p {
+            margin-bottom: 16px;
+        }
     }
 
-    &_section{
+    &_section {
         margin-top: 40px;
         display: flex;
     }
 
-    &_list{
+    &_list {
         margin-left: 40px;
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        // .product-item {
-        //     width: 31.5%;
-        //     margin-bottom: 1.5rem;
-        //     &:nth-child(3n) {
-        //         margin-right: 0;
-        //     }
-        // }
+        .product-item {
+            width: 31.5%;
+            margin-bottom: 1.5rem;
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+// desktop and ipad pro
+@media only screen and (min-width: $mediaLaptopMin) and (max-width: $mediaLaptopMax) {
+    .products {
+        margin-top: 20px;
+        &_list {
+            .product-item {
+                width: 31%;
+            }
+        }
+    }
+}
+
+// for tablets
+@media (max-width: $mediaTabMax) {
+    .products {
+        margin-top: 20px;
+        &_section {
+            flex-direction: column;
+            margin-top: 20px;
+            .filters {
+                width: 100%;
+                min-height: 100%;
+                padding: 10px 20px;
+            }
+        }
+
+        &_list {
+            margin-left: 0;
+            margin-top: 20px;
+            .product-item {
+                width: 48.8%;
+                margin-right: $margin;
+                margin-bottom: $margin;
+                &:nth-child(3n) {
+                    margin-right: $margin;
+                }
+                &:nth-child(even) {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 720px) {
+    .products_list {
+        .product-item {
+            width: 48%;
+        }
+    }
+}
+
+// for mobile device
+@media (max-width: $mediaTabMin) {
+    .products {
+        margin-top: 20px;
+        &_section {
+            flex-direction: column;
+            margin-top: 20px;
+            .filters {
+                width: 100%;
+                min-height: 100%;
+                padding: 10px 20px;
+            }
+        }
+
+        &_list {
+            margin-left: 0;
+            margin-top: 20px;
+            .product-item {
+                width: 100%;
+                margin-right: 0;
+                &:nth-child(3n) {
+                    margin-right: 0;
+                }
+            }
+        }
     }
 }

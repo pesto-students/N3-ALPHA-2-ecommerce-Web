@@ -98,17 +98,21 @@ const HeaderContainer = (props) => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
     }, []);
+    useEffect(() => {
+        if (window.location.href) {
+            setMobileMenu(false);
+            setIsCartOpen(false);
+        }
+    }, [window.location.href]);
 
     const handleScroll = () => {
         const scrollValue = window.scrollY;
         if (scrollValue > 80) {
             setLoginModal(false);
             setIsCartOpen(false);
-        }
-        if (scrollValue > 160) {
             setFixedHeader('fixed');
         }
-        if (scrollValue < 160) {
+        if (scrollValue < 80) {
             setFixedHeader('');
         }
     };

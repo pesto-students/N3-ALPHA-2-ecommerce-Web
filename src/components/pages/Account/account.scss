@@ -120,3 +120,41 @@
         }
     }
 }
+
+// For mobile device
+@media (max-width: $mediaTabMax) {
+    .account {
+        margin-top: 20px;
+        &_content {
+            flex-direction: column;
+            &_tabs {
+                width: 100%;
+                height: auto;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-around;
+                &_item {
+                    margin-bottom: 0;
+                }
+            }
+
+            &_detail {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+
+        .basicInfo {
+            padding: 0;
+            &_info {
+                width: 100%;
+                &_label {
+                    width: 25%;
+                }
+                &_value {
+                    width: 75%;
+                }
+            }
+        }
+    }
+}
