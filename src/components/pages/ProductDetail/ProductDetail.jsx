@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { withRouter } from 'react-router';
 import api from '../../../services/api';
 import Divider from '../../shared/Divider/Divider';
@@ -7,6 +7,8 @@ import ProductItem from '../../shared/ProductItem/ProdcutItem';
 import useGetAllProducts from '../../shared/Hooks/useGetAllProducts';
 import './productDetail.scss';
 import { WhatsappShareButton, WhatsappIcon } from 'react-share';
+import FullPageLoader from '../../shared/Loaders/FullPageLoader';
+import BottomMobilePrice from './BottomMobilePrice';
 
 function ProductDetailed(props) {
     const [product, setProduct] = useState({
@@ -39,73 +41,85 @@ function ProductDetailed(props) {
 
     const handleQuantityChange = (quantity) => {};
     const shareUrl = window.location.href;
+    const { images = [] } = product;
     return (
-        <div className="product-detailed">
-            <section className="product-detailed_product_section">
-                <div className="product-detailed_thumbnails">
-                    {product.images.map((image) => (
+        <Fragment>
+            {images.length > 0 ? (
+                <div className="product-detailed">
+                    <section className="product-detailed_product_section">
+                        <div className="product-detailed_thumbnails">
+                            {product.images.map((image) => (
+                                <img
+                                    className={`product-detailed_thumbnails_item ${
+                                        currentImage === image && 'selected'
+                                    }`}
+                                    src={`/assets/${image}`}
+                                    alt={product.name}
+                                    onClick={(e) => setCurrentImage(image)}
+                                />
+                            ))}
+                        </div>
                         <img
-                            className={`product-detailed_thumbnails_item ${
-                                currentImage === image && 'selected'
-                            }`}
-                            src={`/assets/${image}`}
+                            className="product-detailed_preview"
+                            src={`/assets/${currentImage}`}
                             alt={product.name}
-                            onClick={(e) => setCurrentImage(image)}
                         />
-                    ))}
-                </div>
-                <img
-                    className="product-detailed_preview"
-                    src={`/assets/${currentImage}`}
-                    alt={product.name}
-                />
-                <div className="product-detailed_details">
-                    <h4 className="product-detailed_details_name">
-                        {product.name}
-                    </h4>
-                    <span className="product-detailed_details_price">
-                        <h2 className="product-detailed_details_price_new">
-                            {`₹${product.price}`}
-                            <span>
-                                <del>{`₹${parseInt(
-                                    (110 / 100) * product.price
-                                )}`}</del>
-                            </span>{' '}
-                        </h2>
-                    </span>
-                    <p className="product-detailed_details_description">
-                        {product.description}
-                    </p>
-                    <Divider />
+                        <div className="product-detailed_details">
+                            <h4 className="product-detailed_details_name">
+                                {product.name}
+                            </h4>
+                            <span className="product-detailed_details_price">
+                                <h2 className="product-detailed_details_price_new">
+                                    {`₹${product.price}`}
+                                    <span>
+                                        <del>{`₹${parseInt(
+                                            (110 / 100) * product.price
+                                        )}`}</del>
+                                    </span>{' '}
+                                </h2>
+                            </span>
+                            <p className="product-detailed_details_description">
+                                {product.description}
+                            </p>
+                            <Divider />
 
-                    <p className="product-detailed_details_count">Quantity</p>
-                    <QuantityControl onChange={handleQuantityChange} />
-                    <button className="product-detailed_details_btn">
-                        Checkout
-                    </button>
+                            <p className="product-detailed_details_count">
+                                Quantity
+                            </p>
+                            <QuantityControl onChange={handleQuantityChange} />
+                            <button className="product-detailed_details_btn">
+                                Checkout
+                            </button>
+                        </div>
+                    </section>
+                    <section className="product-detailed_similar_section">
+                        <h4 className="product-detailed_details_name">
+                            Similar products
+                        </h4>
+                        <div className="product-detailed_similar_section_products">
+                            {similarProducts.map(
+                                ({ id, name, thumbnail, price }) => (
+                                    <ProductItem
+                                        name={name}
+                                        id={id}
+                                        img={`/assets/${thumbnail}`}
+                                        price={price}
+                                    />
+                                )
+                            )}
+                        </div>
+                    </section>
+                    <div className="product-detailed_details_share">
+                        <WhatsappShareButton url={shareUrl}>
+                            <WhatsappIcon size={55} round={true} />
+                        </WhatsappShareButton>
+                    </div>
+                    <BottomMobilePrice price={product.price} />
                 </div>
-            </section>
-            <section className="product-detailed_similar_section">
-                <h4 className="product-detailed_details_name">
-                    Similar products
-                </h4>
-                <div className="product-detailed_similar_section_products">
-                    {similarProducts.map(({ id, name, thumbnail, price }) => (
-                        <ProductItem
-                            name={name}
-                            id={id}
-                            img={`/assets/${thumbnail}`}
-                            price={price}
-                        />
-                    ))}
-                </div>
-            </section>
-            <div className="product-detailed_details_share">
-                <WhatsappShareButton url={shareUrl}>
-                    <WhatsappIcon size={55} round={true} />
-                </WhatsappShareButton>
-            </div>
-        </div>
+            ) : (
+                <FullPageLoader />
+            )}
+        </Fragment>
     );
 }
 

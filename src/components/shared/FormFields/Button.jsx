@@ -13,7 +13,7 @@ const Button = (props) => {
         <Fragment>
             {loader ? (
                 <img
-                    src="assets/loader.svg"
+                    src="/assets/loader.svg"
                     className={`form_loader ${loaderClass}`}
                     alt="Loader"
                 />

@@ -1,12 +1,7 @@
 import React from 'react';
 
 const MobileMenu = (props) => {
-    const { handleMobileMenu, isMobileMenu = false } = props;
-
-    const handleMenuSelect = (e) => {
-        console.log('value ===>', e.target.getAttribute('data-value'));
-    };
-
+    const { handleMobileMenu, isMobileMenu = false, handleMenuSelect } = props;
     const handleClass = isMobileMenu ? 'show' : 'hide';
 
     return (

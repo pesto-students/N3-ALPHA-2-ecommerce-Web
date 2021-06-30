@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
 import Banner from './Banner';
 import NewArrivals from './NewArrivals';
+import { getSessionStorage } from '../../../helper/Utils';
 
-const Home = ({ newArrivals = [], recomended = [] }) => {
+const Home = () => {
+    const newArrivals = getSessionStorage('arrivals') || [];
+    const recomended = getSessionStorage('recomended') || [];
     return (
         <Fragment>
             <Banner />

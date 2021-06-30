@@ -1,20 +1,16 @@
-import React, { Fragment } from 'react';
-import HomeComponent from './Home';
+import React, { Fragment, useEffect } from 'react';
+import Home from './Home';
 import './home.scss';
 import useGetAllProducts from '../../shared/Hooks/useGetAllProducts';
-import { getRandomArrayItem, sliceArray } from '../../../helper/Utils';
-import useSessionStorage from '../../shared/Hooks/useSessionStorage';
+import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 
 const HomeContainer = () => {
-    const allProducts = useGetAllProducts(),
-        selectedProd = getRandomArrayItem(allProducts, 8),
-        newArrivals = sliceArray(selectedProd, 0, 4),
-        recomended = sliceArray(selectedProd, 4, 8);
-    const [arrivals] = useSessionStorage('arrivals', newArrivals);
-    const [allRecomended] = useSessionStorage('recomended', recomended);
+    const allProducts = useGetAllProducts();
+    useEffect(() => {}, [allProducts]);
+
     return (
         <Fragment>
-            <HomeComponent newArrivals={arrivals} recomended={allRecomended} />
+            {allProducts.length > 0 ? <Home /> : <FullPageLoader />}
         </Fragment>
     );
 };

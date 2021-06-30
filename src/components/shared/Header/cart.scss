@@ -15,7 +15,7 @@
         width: 0;
     }
     &.show {
-        width: 33%;
+        width: 40%;
         padding: 16px;
         border-radius: 0 0 $borderRadius $borderRadius;
         .cartDetail_top {
@@ -45,6 +45,12 @@
         display: inline-block;
         margin-top: $margin;
     }
+    &_noitem {
+        &_head {
+            margin-top: $margin;
+            margin-bottom: 0;
+        }
+    }
 }
 
 .cartItem {
@@ -55,6 +61,9 @@
     align-items: center;
     &_link {
         width: 20%;
+    }
+    &_img {
+        max-height: 104px;
     }
     &_detail {
         width: 40%;

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import './address.scss';
 
 const ManageAddress = ({ value = '' }) => {
@@ -37,7 +37,7 @@ const ManageAddress = ({ value = '' }) => {
                 {value}
             </textarea>
             {isEdit ? (
-                <Fragment>
+                <div className="addressWrap_btnWrap">
                     <button
                         className="addressWrap_btn"
                         onClick={() => handleSave()}
@@ -50,7 +50,7 @@ const ManageAddress = ({ value = '' }) => {
                     >
                         Cancel
                     </button>
-                </Fragment>
+                </div>
             ) : (
                 <button
                     className="addressWrap_btn"

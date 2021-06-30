@@ -3,7 +3,6 @@ import Modal from '../Modal/modal';
 import Login from './LoginForm';
 import Register from './RegisterForm';
 import Menu from './Menu';
-import MobileMenu from './MobileMenu';
 import { Link, withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import { CartContext } from '../Contexts/CartContext';
@@ -49,7 +48,8 @@ const Header = (props) => {
     return (
         <header className={`header ${fixedHeader}`}>
             <div className="header_topbar">
-                <MobileMenu
+                <Menu
+                    mobileMenu={true}
                     handleMobileMenu={handleMobileMenu}
                     isMobileMenu={isMobileMenu}
                 />
@@ -60,6 +60,7 @@ const Header = (props) => {
                         className="header_logo-img"
                     />
                 </Link>
+                <Menu />
                 <form onSubmit={handleSubmit} className="header_search_form">
                     <input
                         name="search"
@@ -94,9 +95,7 @@ const Header = (props) => {
                     />
                     {userDetails ? (
                         <Fragment>
-                            <span className="header_login-text">
-                                My Account
-                            </span>
+                            <span className="header_login-text">Profile</span>
                             <div className="userMenu">
                                 <Link to="/account" className="userMenu_item">
                                     Account
@@ -114,7 +113,7 @@ const Header = (props) => {
                             className="header_login-text"
                             onClick={() => handleLoginClick()}
                         >
-                            Login / Signup
+                            Login
                         </span>
                     )}
                 </div>
@@ -146,12 +145,14 @@ const Header = (props) => {
                     </Modal>
                 )}
             </div>
-            <input
-                type="text"
-                placeholder="Search for products"
-                className="mobileMenu_search"
-            />
-            <Menu />
+            <form onSubmit={handleSubmit} className="mobileMenu_search">
+                <input
+                    name="search"
+                    className="mobileMenu_search_input"
+                    type="text"
+                    placeholder="Search for products"
+                />
+            </form>
         </header>
     );
 };
