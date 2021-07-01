@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './quantityControl.scss';
 
 export default function QuantityControl(props) {
-    const [quanity, setQuantity] = useState(1);
+    const [quanity, setQuantity] = useState(props.quanity || 1);
 
     useEffect(() => props.onChange(quanity), [quanity]);
 

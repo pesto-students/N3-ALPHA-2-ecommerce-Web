@@ -1,0 +1,44 @@
+@import '../../shared/Style/index.scss';
+
+
+.checkout-page {
+    @include sectionWidth;
+
+    &_title{
+        font-size: 24px;
+        font-weight: normal;
+        text-align: left;
+        margin-bottom:20px;
+    
+    }
+
+    &_subheading{
+        @include h5;
+        text-align:left;
+    }
+
+    &_content{
+        margin-top: $topSpacing;
+
+    }
+    &_wrapper{
+
+        display: flex;
+        justify-content: space-between;
+        
+        &_address{
+            width: 400px;
+        }
+        &_cart{
+            width: 440px;
+            .cartDetail{
+                position: static;
+                z-index: 0;
+            }
+        }
+
+     
+
+    }
+}
+

@@ -1,10 +1,11 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router';
 import api from '../../../services/api';
 import Divider from '../../shared/Divider/Divider';
 import QuantityControl from '../../shared/QuantityControl/QuantityControl';
 import ProductItem from '../../shared/ProductItem/ProdcutItem';
 import useGetAllProducts from '../../shared/Hooks/useGetAllProducts';
+import { CartContext } from '../../shared/Contexts/CartContext';
 import './productDetail.scss';
 import { WhatsappShareButton, WhatsappIcon } from 'react-share';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
@@ -18,12 +19,20 @@ function ProductDetailed(props) {
         price: 0,
         description: '',
         images: [],
+        quantity: 10,
     });
     const [currentImage, setCurrentImage] = useState('');
+    const [quantity, setQuantity] = useState(1);
     // Fetch similar products
     const similarProducts = useGetAllProducts().filter(
         (item) => item.category === product.category && item.id !== product.id
     );
+    const { cartItems, addProduct, increase, decrease } =
+        useContext(CartContext);
+
+    const isInCart = (product) => {
+        return !!cartItems.find((item) => item.id === product.id);
+    };
 
     // Fetch product by id based on route params
     useEffect(() => {
@@ -37,11 +46,32 @@ function ProductDetailed(props) {
 
     useEffect(() => {
         setCurrentImage(product.thumbnail);
+        // Set the title of document to the name of the product for
+        document.title = `${product.name} | HyGenie`;
     }, [product]);
 
-    const handleQuantityChange = (quantity) => {};
     const shareUrl = window.location.href;
     const { images = [] } = product;
+    // if product is in cart, fetch quanitiy from cart
+    useEffect(() => {
+        console.log('CART', cartItems);
+        if (isInCart(product)) {
+            const { quantity } = cartItems.find(
+                (item) => item.id === product.id
+            );
+            setProduct({ ...product, quantity });
+        }
+    }, [cartItems]);
+
+    const handleQuantityChange = (quantity) => {
+        if (product.id) {
+            setQuantity((prevQuantity) => {
+                // prevQuantity < quantity ? increase(product) : decrease(product);
+                return quantity;
+            });
+        }
+    };
+
     return (
         <Fragment>
             {images.length > 0 ? (
@@ -87,7 +117,10 @@ function ProductDetailed(props) {
                                 Quantity
                             </p>
                             <QuantityControl onChange={handleQuantityChange} />
-                            <button className="product-detailed_details_btn">
+                            <button
+                                onClick={(e) => props.history.push('/checkout')}
+                                className="product-detailed_details_btn"
+                            >
                                 Checkout
                             </button>
                         </div>
