@@ -5,6 +5,7 @@ import {
     Route,
     Switch,
 } from 'react-router-dom';
+import FullPageLoader from '../components/shared/Loaders/FullPageLoader';
 const Container = lazy(() => import('../components/shared/Container/'));
 const Account = lazy(() => import('../components/pages/Account/Account'));
 const Home = lazy(() => import('../components/pages/Home/HomeContainer'));
@@ -39,7 +40,7 @@ const MainView = (props) => {
 export default function Routes(props) {
     return (
         <Router>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<FullPageLoader />}>
                 <div>
                     <Switch>
                         <MainView />
