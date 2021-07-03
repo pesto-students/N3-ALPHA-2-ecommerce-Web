@@ -46,12 +46,6 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\"",
-      "pre-push": "npm test"
-    }
-  },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "husky": "^7.0.0"
