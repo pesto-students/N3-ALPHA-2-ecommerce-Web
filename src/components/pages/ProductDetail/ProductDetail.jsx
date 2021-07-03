@@ -9,8 +9,10 @@ import './productDetail.scss';
 import { WhatsappShareButton, WhatsappIcon } from 'react-share';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import BottomMobilePrice from './BottomMobilePrice';
+import { useTranslation } from 'react-i18next';
 
 function ProductDetailed(props) {
+    const { t } = useTranslation();
     const [product, setProduct] = useState({
         id: '',
         name: '',
@@ -84,17 +86,17 @@ function ProductDetailed(props) {
                             <Divider />
 
                             <p className="product-detailed_details_count">
-                                Quantity
+                                {t('qty_text')}
                             </p>
                             <QuantityControl onChange={handleQuantityChange} />
                             <button className="product-detailed_details_btn">
-                                Checkout
+                                {t('checkout_text')}
                             </button>
                         </div>
                     </section>
                     <section className="product-detailed_similar_section">
                         <h4 className="product-detailed_details_name">
-                            Similar products
+                            {t('similar_text')}
                         </h4>
                         <div className="product-detailed_similar_section_products">
                             {similarProducts.map(

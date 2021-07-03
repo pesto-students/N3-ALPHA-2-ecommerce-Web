@@ -1,8 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const MobileMenu = (props) => {
     const { handleMobileMenu, isMobileMenu = false, handleMenuSelect } = props;
     const handleClass = isMobileMenu ? 'show' : 'hide';
+    const { t } = useTranslation();
 
     return (
         <nav className="mobileMenu" onClick={(e) => handleMenuSelect(e)}>
@@ -13,17 +15,20 @@ const MobileMenu = (props) => {
                 >
                     ×
                 </p>
+                <p data-value="all" className="mobileMenu_item">
+                    {t('product_all')}
+                </p>
                 <p data-value="masks" className="mobileMenu_item">
-                    Masks
+                    {t('product_mask')}
                 </p>
                 <p data-value="sanitizers" className="mobileMenu_item">
-                    Sanitizers
+                    {t('product_sanitizer')}
                 </p>
                 <p data-value="handwash" className="mobileMenu_item">
-                    Hand Wash
+                    {t('product_handWash')}
                 </p>
                 <p data-value="gloves" className="mobileMenu_item">
-                    Gloves
+                    {t('product_gloves')}
                 </p>
             </div>
             <span
