@@ -40,5 +40,10 @@
      
 
     }
+
+    &_payment-btn{
+        @include hyGenieBtn;
+    }
+    
 }
 

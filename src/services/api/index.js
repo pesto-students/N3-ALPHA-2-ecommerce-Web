@@ -3,6 +3,7 @@ import product from './product';
 import user from './user';
 import firebase from './firebase';
 import cart from './cart';
+import order from './order';
 
 export default {
     user,
@@ -10,4 +11,5 @@ export default {
     product,
     firebase,
     cart,
+    order,
 };

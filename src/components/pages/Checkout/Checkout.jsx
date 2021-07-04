@@ -5,6 +5,8 @@ import { CartContext } from '../../shared/Contexts/CartContext';
 import { Link } from 'react-router-dom';
 import Addresses from '../../shared/Addresses/Addresses';
 import './checkout.scss';
+import firebase from 'firebase';
+import Stripe from 'stripe';
 
 function Checkout(props) {
     const { cartItems, total = 0 } = useContext(CartContext);
@@ -23,6 +25,46 @@ function Checkout(props) {
                 return address;
             })
         );
+    };
+
+    const handlePayment = () => {
+        console.log(cartItems);
+        // {
+        //     quantity: 1,
+        //     price_data: {
+        //       currency: "usd",
+        //       unit_amout: 100 * 100,
+        //       product_data: {
+        //         name: "New camera",
+        //       },
+        //     },
+        //   },
+        const makePayment = firebase
+            .functions()
+            .httpsCallable('createStripeCheckout');
+
+        const line_items = cartItems.map((cartItem) => ({
+            quantity: cartItem.quantity,
+            price_data: {
+                currency: 'inr',
+                unit_amount: 100 * cartItem.price,
+                product_data: {
+                    name: cartItem.name,
+                },
+            },
+        }));
+
+        const stripe = window.Stripe(
+            'pk_test_51J8OHVSExG0AVvgthbeLCEur6ss94JI6seNGDByeHNg9WOHvI1LP8cYOFqCkZxq2Wc7DMgToyduS3nRKSXESBw6j00NH3ajClG'
+        );
+
+        makePayment({ line_items, products: cartItems })
+            .then((res) => {
+                console.log('RES', res);
+                const sessionId = res.data.id;
+                stripe.redirectToCheckout({ sessionId });
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -57,23 +99,23 @@ function Checkout(props) {
                             </div>
                             <div className="cartDetail_top amount">
                                 <span className="cartDetail_head">
-                                    Delivery charges
-                                </span>
-                                <span className="cartDetail_head">
-                                    &#8377; 50
-                                </span>
-                                <br />
-                                <span className="cartDetail_head">
                                     Total Amount
                                 </span>
                                 <span className="cartDetail_head">
                                     &#8377; {total}
                                 </span>
                             </div>
+
                             {/* <Link to="/" className="cartDetail_checkoutBtn">
                             Checkout
                         </Link> */}
                         </div>
+                        <button
+                            className="checkout-page_payment-btn"
+                            onClick={handlePayment}
+                        >
+                            Porceed to pay
+                        </button>
                     </div>
                 </section>
             </div>
