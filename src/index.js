@@ -6,14 +6,15 @@ import 'antd/dist/antd.css';
 import reportWebVitals from './reportWebVitals';
 import CartContextProvider from './components/shared/Contexts/CartContext';
 import ErrorBoundry from './services/api/ErrorBoundry';
+import ErrorBoundary from 'antd/lib/alert/ErrorBoundary';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
     <CartContextProvider>
         <React.StrictMode>
-            <ErrorBoundry>
+            <ErrorBoundary>
                 <App />
-            </ErrorBoundry>
+            </ErrorBoundary>
         </React.StrictMode>
     </CartContextProvider>,
     document.getElementById('root')
