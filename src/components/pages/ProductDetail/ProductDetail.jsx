@@ -21,18 +21,25 @@ function ProductDetailed(props) {
         images: [],
         quantity: 10,
     });
+
     const [currentImage, setCurrentImage] = useState('');
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(0);
+
     // Fetch similar products
     const similarProducts = useGetAllProducts().filter(
         (item) => item.category === product.category && item.id !== product.id
     );
+
     const { cartItems, addProduct, increase, decrease } =
         useContext(CartContext);
 
     const isInCart = (product) => {
         return !!cartItems.find((item) => item.id === product.id);
     };
+
+    // const { quantity: _quantity } = cartItems.find(
+    //     (item) => item.id === product.id
+    // );
 
     // Fetch product by id based on route params
     useEffect(() => {
@@ -67,7 +74,10 @@ function ProductDetailed(props) {
     const handleQuantityChange = (quantity) => {
         if (product.id) {
             setQuantity((prevQuantity) => {
-                // prevQuantity < quantity ? increase(product) : decrease(product);
+                if (isInCart(product))
+                    prevQuantity < quantity
+                        ? increase(product)
+                        : decrease(product);
                 return quantity;
             });
         }
@@ -77,7 +87,13 @@ function ProductDetailed(props) {
         if (type === 'checkout') {
             props.history.push('/checkout');
         } else {
-            addProduct(product);
+            const _product = {
+                img: `assets/${product.thumbnail}`,
+                name: product.name,
+                price: product.price,
+                quantity: product.quantity,
+            };
+            addProduct(_product);
         }
     };
 
@@ -125,7 +141,10 @@ function ProductDetailed(props) {
                             <p className="product-detailed_details_count">
                                 Quantity
                             </p>
-                            <QuantityControl onChange={handleQuantityChange} />
+                            <QuantityControl
+                                onChange={handleQuantityChange}
+                                quantity={quantity}
+                            />
 
                             {/* Proceed to checkout if item is in cart else add to cart */}
 
