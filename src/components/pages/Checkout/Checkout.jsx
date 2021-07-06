@@ -6,39 +6,12 @@ import { Link } from 'react-router-dom';
 import Addresses from '../../shared/Addresses/Addresses';
 import './checkout.scss';
 import firebase from 'firebase';
-import Stripe from 'stripe';
+import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 
 function Checkout(props) {
     const { cartItems, total = 0 } = useContext(CartContext);
 
-    const _addresses = [
-        { text: 'f fdlkj fdlskjf fldskjk fsdlkjk jfsdlkj ', default: true },
-        { text: 'f fdlkj fdlskjf fldskjk fsdlkjk jfsdlkj ', default: false },
-        { text: 'f fdlkj fdlskjf fldskjk fsdlkjk jfsdlkj ', default: false },
-    ];
-    const [addresses, setAddresses] = useState(_addresses);
-
-    const handleAddressUpdate = (addresses) => {
-        setAddresses(
-            addresses.map((address, id) => {
-                address.id = id;
-                return address;
-            })
-        );
-    };
-
     const handlePayment = () => {
-        console.log(cartItems);
-        // {
-        //     quantity: 1,
-        //     price_data: {
-        //       currency: "usd",
-        //       unit_amout: 100 * 100,
-        //       product_data: {
-        //         name: "New camera",
-        //       },
-        //     },
-        //   },
         const makePayment = firebase
             .functions()
             .httpsCallable('createStripeCheckout');
@@ -70,7 +43,7 @@ function Checkout(props) {
     return (
         <div className="checkout-page">
             <div className="checkout-page_content">
-                <h4 class="checkout-page_title">Checkout</h4>
+                <h4 className="checkout-page_title">Checkout</h4>
 
                 <section className="checkout-page_wrapper">
                     {/* Shipping Address */}
@@ -79,16 +52,12 @@ function Checkout(props) {
                             Shipping address
                         </h5>
                         <div className="checkout-page_wrapper_addresses">
-                            <Addresses
-                                addresses={addresses}
-                                onUpdate={handleAddressUpdate}
-                            />
+                            <Addresses />
                         </div>
                     </div>
                     {/* Cart items */}
                     <div className="checkout-page_wrapper_cart">
                         <div className="cartDetail">
-                            <h4>Items</h4>
                             <div className="cartDetail_content">
                                 {cartItems.map((product) => (
                                     <CartItem
@@ -105,10 +74,6 @@ function Checkout(props) {
                                     &#8377; {total}
                                 </span>
                             </div>
-
-                            {/* <Link to="/" className="cartDetail_checkoutBtn">
-                            Checkout
-                        </Link> */}
                         </div>
                         <button
                             className="checkout-page_payment-btn"

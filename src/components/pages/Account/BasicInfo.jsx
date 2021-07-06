@@ -1,7 +1,6 @@
 import React from 'react';
 import { getLocalStorage } from '../../../helper/Utils';
-import Address from '../../shared/Address/Address';
-import AddAddress from '../../shared/Address/AddAddress';
+import Addresses from '../../shared/Addresses/Addresses';
 
 const BasicInfo = () => {
     const userDetails = getLocalStorage('userDetails');
@@ -20,13 +19,7 @@ const BasicInfo = () => {
             <p className="basicInfo_info">
                 <span className="basicInfo_info_label">Manage Address</span>
                 <span className="basicInfo_info_value">
-                    <Address value={'Hello Rohit Address 1'} />
-                </span>
-            </p>
-            <p className="basicInfo_info">
-                <span className="basicInfo_info_label"></span>
-                <span className="basicInfo_info_value">
-                    <AddAddress />
+                    <Addresses />
                 </span>
             </p>
         </div>

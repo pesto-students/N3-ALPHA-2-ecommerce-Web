@@ -4,6 +4,7 @@ import user from './user';
 import firebase from './firebase';
 import cart from './cart';
 import order from './order';
+import address from './address';
 
 export default {
     user,
@@ -12,4 +13,5 @@ export default {
     firebase,
     cart,
     order,
+    address,
 };

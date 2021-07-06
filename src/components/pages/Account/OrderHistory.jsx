@@ -1,7 +1,5 @@
-import { func } from 'assert-plus';
 import { Steps } from 'antd';
 import './orderHistory.scss';
-import { product } from 'prelude-ls';
 import { Link } from 'react-router-dom';
 import Divider from '../../shared/Divider/Divider';
 
@@ -34,6 +32,7 @@ export default function OrderHistory(props) {
                                 <img
                                     className="order-history_item_products_item_image"
                                     src={product.img}
+                                    alt={product.name}
                                 />
                                 <h4 className="order-history_item_products_item_title">
                                     {product.name}

@@ -1,15 +1,15 @@
-import { Fragment, useState, useEffect, useContext } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
+import { WhatsappIcon, WhatsappShareButton } from 'react-share';
 import api from '../../../services/api';
-import Divider from '../../shared/Divider/Divider';
-import QuantityControl from '../../shared/QuantityControl/QuantityControl';
-import ProductItem from '../../shared/ProductItem/ProdcutItem';
-import useGetAllProducts from '../../shared/Hooks/useGetAllProducts';
 import { CartContext } from '../../shared/Contexts/CartContext';
-import './productDetail.scss';
-import { WhatsappShareButton, WhatsappIcon } from 'react-share';
+import Divider from '../../shared/Divider/Divider';
+import useGetAllProducts from '../../shared/Hooks/useGetAllProducts';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
+import ProductItem from '../../shared/ProductItem/ProdcutItem';
+import QuantityControl from '../../shared/QuantityControl/QuantityControl';
 import BottomMobilePrice from './BottomMobilePrice';
+import './productDetail.scss';
 
 function ProductDetailed(props) {
     const [product, setProduct] = useState({
@@ -41,6 +41,7 @@ function ProductDetailed(props) {
             const product = snapshot.val();
             product.id = id;
             setProduct(product);
+            window.scrollTo(0, 0);
         });
     }, [props.match.params.id]);
 
@@ -69,6 +70,14 @@ function ProductDetailed(props) {
                 // prevQuantity < quantity ? increase(product) : decrease(product);
                 return quantity;
             });
+        }
+    };
+
+    const handleClick = (type) => {
+        if (type === 'checkout') {
+            props.history.push('/checkout');
+        } else {
+            addProduct(product);
         }
     };
 
@@ -117,11 +126,20 @@ function ProductDetailed(props) {
                                 Quantity
                             </p>
                             <QuantityControl onChange={handleQuantityChange} />
+
+                            {/* Proceed to checkout if item is in cart else add to cart */}
+
                             <button
-                                onClick={(e) => props.history.push('/checkout')}
                                 className="product-detailed_details_btn"
+                                onClick={(e) =>
+                                    handleClick(
+                                        isInCart(product)
+                                            ? 'checkout'
+                                            : 'addToCart'
+                                    )
+                                }
                             >
-                                Checkout
+                                {isInCart(product) ? 'Checkout' : 'Add to cart'}
                             </button>
                         </div>
                     </section>

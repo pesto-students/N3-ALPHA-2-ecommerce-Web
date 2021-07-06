@@ -1,19 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import api from '../../../services/api';
+import './addresses.scss';
+import { toaster } from '../../../helper/Utils';
 
 function AddressItem(props) {
     const {
         id,
-        onInputChange,
-        onEdit,
-        onCancel,
-        onSave,
+        onUpdate,
         text: defaultText,
         isDefault,
-        onUpdate,
+        onChange,
         addresses,
+        editMode,
+        draftMode,
     } = props;
+
     const [isEditing, setIsEditing] = useState(false);
-    const [text, setText] = useState(defaultText);
+
+    useEffect(() => setIsEditing(editMode), [editMode]);
 
     const handleEdit = () => {
         setIsEditing(true);
@@ -21,16 +25,23 @@ function AddressItem(props) {
 
     const handleCancel = () => {
         setIsEditing(false);
+        if (draftMode) {
+            // delete the last addedd address from the draft
+            onChange(addresses.filter((address) => address.id !== id));
+        }
     };
 
     const handleSave = () => {
+        const address = addresses.find((address) => address.id === id);
+        const { text } = address;
+        if (!text) return;
+        if (!addresses.length) address.default = true; // set as default address if its the only address
         setIsEditing(false);
-        onSave(id, text);
+        onUpdate(addresses);
     };
 
-    const handleUpdate = (e) => {
-        console.log(e.target.value, addresses, id);
-        onUpdate(
+    const handleChange = (e) => {
+        onChange(
             addresses.map((address) => {
                 if (address.id === id) address.text = e.target.value;
                 return address;
@@ -38,47 +49,78 @@ function AddressItem(props) {
         );
     };
 
+    const handleDelete = () => {
+        const _addresses = addresses.filter((address) => address.id !== id);
+        if (_addresses.length === 1) _addresses[0].default = true; // set as default address if its the only address
+        onChange(_addresses);
+        onUpdate(_addresses);
+    };
+
+    const handleDefaultChange = (e) => {
+        const _addresses = addresses.map((address) => {
+            if (address.id === id) address.default = true;
+            else address.default = false;
+            return address;
+        });
+
+        onChange(_addresses);
+        onUpdate(_addresses);
+    };
+
     return (
         <div className="addresses_address_item">
             {!isEditing && (
                 <input
                     checked={isDefault}
+                    onChange={handleDefaultChange}
                     className="addresses_address_item_radio"
                     type="radio"
+                    name="default"
                 />
             )}
-            {isEditing ? (
-                <textarea
-                    value={defaultText}
-                    className="addresses_address_item_textarea"
-                    onChange={handleUpdate}
-                />
-            ) : (
-                <span className="addresses_address_item_text">
-                    {defaultText}
-                </span>
-            )}
+            <div className="addresses_address_item_content">
+                {isEditing ? (
+                    <textarea
+                        value={defaultText}
+                        className="addresses_address_item_textarea"
+                        onChange={handleChange}
+                    />
+                ) : (
+                    <span className="addresses_address_item_text">
+                        {defaultText}
+                    </span>
+                )}
+            </div>
+
             {!isEditing && (
-                <button
-                    className="addresses_address_item_btn-edit"
-                    onClick={handleEdit}
-                >
-                    Edit
-                </button>
+                <>
+                    <button
+                        className="addresses_address_item_btn"
+                        onClick={handleEdit}
+                    >
+                        <i className="fa fa-pen" aria-hidden="true"></i>{' '}
+                    </button>
+                    <button
+                        className="addresses_address_item_btn danger"
+                        onClick={handleDelete}
+                    >
+                        <i className="fa fa-trash" aria-hidden="true"></i>{' '}
+                    </button>
+                </>
             )}
             {isEditing && (
                 <>
                     <button
-                        className="addresses_address_item_btn-cancel"
+                        className="addresses_address_item_btn"
                         onClick={handleCancel}
                     >
-                        Cancel
+                        <i className="fa fa-times" aria-hidden="true"></i>{' '}
                     </button>
                     <button
-                        className="addresses_address_item_btn-save"
+                        className="addresses_address_item_btn"
                         onClick={handleSave}
                     >
-                        Save
+                        <i className="fa fa-check" aria-hidden="true"></i>{' '}
                     </button>
                 </>
             )}
@@ -87,69 +129,66 @@ function AddressItem(props) {
 }
 
 function Addresses(props) {
-    const { addresses, onUpdate } = props;
     const [isNewClicked, setIsNewClicked] = useState(false);
     const [currentId, setCurrentId] = useState(null);
+    const [addresses, setAddresses] = useState([]);
+
+    useEffect(() => {
+        getAllAddresses();
+    }, []);
+
+    const getAllAddresses = async () => {
+        try {
+            const snapshot = await api.address.getAll();
+            const addresses = (await snapshot.val().addresses) || [];
+            setAddresses(
+                addresses.map((address, id) => {
+                    address.id = id;
+                    return address;
+                })
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const onChange = (addresses) => {
+        setAddresses(addresses);
+    };
 
     const handleAddNew = () => {
+        const id = addresses.length;
         setIsNewClicked(true);
-        const newAddress = { id: addresses.length, text: '', default: false };
-        onUpdate([...addresses, newAddress]);
+        setCurrentId(id);
+        const newAddress = { id, text: '', default: false };
+        onChange([...addresses, newAddress]);
     };
 
-    const handleCancel = (id) => {
-        setIsNewClicked(false);
-    };
-
-    const handleSave = (id, text) => {
-        setIsNewClicked(false);
-        onUpdate(
-            addresses.map((address) => {
-                if (addresses.id === id) address.text = text;
-                return address;
-            })
-        );
+    const handleUpdate = (addresses) => {
+        console.log(addresses);
+        api.address.update(addresses).then((res) => {
+            getAllAddresses();
+            toaster('Addresses have been updated!', 3000, 'success');
+        });
     };
 
     return (
         <div className="addresses">
             {addresses.map((address) => (
                 <AddressItem
+                    key={address.id}
                     id={address.id}
                     text={address.text}
                     isDefault={address.default}
-                    onSave={() => {}}
-                    onUpdate={onUpdate}
+                    onChange={onChange}
+                    onUpdate={handleUpdate}
                     addresses={addresses}
+                    editMode={currentId && currentId === address.id}
+                    draftMode={
+                        currentId && currentId === address.id && isNewClicked // true when add new  is clicked
+                    }
                 />
             ))}
-            {/* Add new address */}
-            {isNewClicked && (
-                <div className="addresses_add">
-                    <textarea
-                        className="addresses_address_item_textarea"
-                        value={
-                            currentId
-                                ? addresses.find(
-                                      (item) => item.id === currentId
-                                  ).text
-                                : ''
-                        }
-                    />
-                    <button
-                        className="addresses_address_item_btn-save"
-                        onClick={handleSave}
-                    >
-                        Save
-                    </button>
-                    <button
-                        className="addresses_address_item_btn-cancel"
-                        onClick={handleCancel}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            )}
 
             <button className="addresses_btn-add" onClick={handleAddNew}>
                 Add new address
