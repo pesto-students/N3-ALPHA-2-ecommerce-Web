@@ -10,8 +10,10 @@ import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 
 function Checkout(props) {
     const { cartItems, total = 0 } = useContext(CartContext);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handlePayment = () => {
+        setIsLoading(true);
         const makePayment = firebase
             .functions()
             .httpsCallable('createStripeCheckout');
@@ -33,58 +35,65 @@ function Checkout(props) {
 
         makePayment({ line_items, products: cartItems })
             .then((res) => {
-                console.log('RES', res);
+                setIsLoading(false);
                 const sessionId = res.data.id;
                 stripe.redirectToCheckout({ sessionId });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                setIsLoading(false);
+                console.log(err);
+            });
     };
 
     return (
-        <div className="checkout-page">
-            <div className="checkout-page_content">
-                <h4 className="checkout-page_title">Checkout</h4>
+        <>
+            {isLoading && <FullPageLoader />}
 
-                <section className="checkout-page_wrapper">
-                    {/* Shipping Address */}
-                    <div className="checkout-page_wrapper_address">
-                        <h5 className="checkout-page_subheading">
-                            Shipping address
-                        </h5>
-                        <div className="checkout-page_wrapper_addresses">
-                            <Addresses />
-                        </div>
-                    </div>
-                    {/* Cart items */}
-                    <div className="checkout-page_wrapper_cart">
-                        <div className="cartDetail">
-                            <div className="cartDetail_content">
-                                {cartItems.map((product) => (
-                                    <CartItem
-                                        key={product.id}
-                                        product={product}
-                                    />
-                                ))}
-                            </div>
-                            <div className="cartDetail_top amount">
-                                <span className="cartDetail_head">
-                                    Total Amount
-                                </span>
-                                <span className="cartDetail_head">
-                                    &#8377; {total}
-                                </span>
+            <div className="checkout-page">
+                <div className="checkout-page_content">
+                    <h4 className="checkout-page_title">Checkout</h4>
+
+                    <section className="checkout-page_wrapper">
+                        {/* Shipping Address */}
+                        <div className="checkout-page_wrapper_address">
+                            <h5 className="checkout-page_subheading">
+                                Shipping address
+                            </h5>
+                            <div className="checkout-page_wrapper_addresses">
+                                <Addresses />
                             </div>
                         </div>
-                        <button
-                            className="checkout-page_payment-btn"
-                            onClick={handlePayment}
-                        >
-                            Porceed to pay
-                        </button>
-                    </div>
-                </section>
+                        {/* Cart items */}
+                        <div className="checkout-page_wrapper_cart">
+                            <div className="cartDetail">
+                                <div className="cartDetail_content">
+                                    {cartItems.map((product) => (
+                                        <CartItem
+                                            key={product.id}
+                                            product={product}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="cartDetail_top amount">
+                                    <span className="cartDetail_head">
+                                        Total Amount
+                                    </span>
+                                    <span className="cartDetail_head">
+                                        &#8377; {total}
+                                    </span>
+                                </div>
+                            </div>
+                            <button
+                                className="checkout-page_payment-btn"
+                                onClick={handlePayment}
+                            >
+                                Porceed to pay
+                            </button>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
