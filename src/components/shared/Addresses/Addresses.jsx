@@ -176,9 +176,7 @@ function Addresses(props) {
     };
 
     const handleCancel = () => {
-        console.log('cancel');
-        console.log(defaultAddresses);
-        setAddresses(defaultAddresses);
+        setAddresses(JSON.parse(JSON.stringify(defaultAddresses)));
     };
 
     return (
