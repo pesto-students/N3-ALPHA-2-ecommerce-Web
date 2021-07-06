@@ -92,6 +92,7 @@ function ProductDetailed(props) {
                 name: product.name,
                 price: product.price,
                 quantity: product.quantity,
+                id: product.id,
             };
             addProduct(_product);
         }
