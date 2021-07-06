@@ -10,6 +10,7 @@ function AddressItem(props) {
         text: defaultText,
         isDefault,
         onChange,
+        onCancel,
         addresses,
         editMode,
         draftMode,
@@ -29,6 +30,7 @@ function AddressItem(props) {
             // delete the last addedd address from the draft
             onChange(addresses.filter((address) => address.id !== id));
         }
+        onCancel();
     };
 
     const handleSave = () => {
@@ -132,6 +134,7 @@ function Addresses(props) {
     const [isNewClicked, setIsNewClicked] = useState(false);
     const [currentId, setCurrentId] = useState(null);
     const [addresses, setAddresses] = useState([]);
+    const [defaultAddresses, setDefaultAddresses] = useState([]);
 
     useEffect(() => {
         getAllAddresses();
@@ -140,13 +143,13 @@ function Addresses(props) {
     const getAllAddresses = async () => {
         try {
             const snapshot = await api.address.getAll();
-            const addresses = (await snapshot.val().addresses) || [];
-            setAddresses(
-                addresses.map((address, id) => {
-                    address.id = id;
-                    return address;
-                })
-            );
+            let addresses = (await snapshot.val().addresses) || [];
+            addresses = addresses.map((address, id) => {
+                address.id = id;
+                return address;
+            });
+            setAddresses(addresses);
+            setDefaultAddresses(JSON.parse(JSON.stringify(addresses))); // keep a copy to undo chanegs when cancel is clicked
         } catch (err) {
             console.log(err);
         }
@@ -172,6 +175,12 @@ function Addresses(props) {
         });
     };
 
+    const handleCancel = () => {
+        console.log('cancel');
+        console.log(defaultAddresses);
+        setAddresses(defaultAddresses);
+    };
+
     return (
         <div className="addresses">
             {addresses.map((address) => (
@@ -182,6 +191,7 @@ function Addresses(props) {
                     isDefault={address.default}
                     onChange={onChange}
                     onUpdate={handleUpdate}
+                    onCancel={handleCancel}
                     addresses={addresses}
                     editMode={currentId && currentId === address.id}
                     draftMode={
