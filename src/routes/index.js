@@ -15,6 +15,7 @@ const Products = lazy(() =>
 const ProductDetailed = lazy(() =>
     import('../components/pages/ProductDetail/ProductDetail')
 );
+const Checkout = lazy(() => import('../components/pages/Checkout/Checkout'));
 
 const MainView = (props) => {
     return (
@@ -25,7 +26,6 @@ const MainView = (props) => {
                 component={Home}
                 render={() => <Redirect to="/" />}
             />
-            <Route exact path="/account" component={Account} />
             <Route
                 exact
                 path="/products/:id?"
@@ -33,6 +33,8 @@ const MainView = (props) => {
                     match.params.id ? <ProductDetailed /> : <Products />
                 }
             />
+            <Route exact path="/account" component={Account} />
+            <Route exact path="/checkout" component={Checkout} />
         </Container>
     );
 };

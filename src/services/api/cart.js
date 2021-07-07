@@ -1,12 +1,12 @@
 import firebase from './firebase';
 
-async function updateAddress(addresses) {
+async function update() {
     const ref = firebase.database().ref(`users`);
     return await ref.set({
-        addresses,
+        cart: [{ name: 'test' }],
     });
 }
 
 export default {
-    updateAddress,
+    update,
 };

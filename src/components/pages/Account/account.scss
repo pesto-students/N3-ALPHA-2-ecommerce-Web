@@ -110,8 +110,10 @@
             display: flex;
             &_label {
                 width: 150px;
+                font-weight: bold;
             }
             &_value {
+                
                 font-weight: 500;
             }
         }
