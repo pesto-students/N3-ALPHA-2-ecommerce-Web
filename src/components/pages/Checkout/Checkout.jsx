@@ -7,6 +7,7 @@ import Addresses from '../../shared/Addresses/Addresses';
 import './checkout.scss';
 import firebase from 'firebase';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
+import { baseURL } from '../../../services/api/config';
 
 function Checkout(props) {
     const { cartItems, total = 0 } = useContext(CartContext);
@@ -33,7 +34,11 @@ function Checkout(props) {
             'pk_test_51J8OHVSExG0AVvgthbeLCEur6ss94JI6seNGDByeHNg9WOHvI1LP8cYOFqCkZxq2Wc7DMgToyduS3nRKSXESBw6j00NH3ajClG'
         );
 
-        makePayment({ line_items, products: cartItems })
+        makePayment({
+            line_items,
+            success_url: `${baseURL}/account?menu=orders`,
+            cancel_url: `${baseURL}/checkout`,
+        })
             .then((res) => {
                 setIsLoading(false);
                 const sessionId = res.data.id;
