@@ -39,7 +39,7 @@ const CartDetail = ({ isCartOpen = false, handleCartClick }) => {
                                 &#8377; {total}
                             </span>
                         </div>
-                        <Link to="/" className="cartDetail_checkoutBtn">
+                        <Link to="/checkout" className="cartDetail_checkoutBtn">
                             {t('checkout_text')}
                         </Link>
                     </Fragment>

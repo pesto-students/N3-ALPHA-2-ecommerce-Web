@@ -1,0 +1,31 @@
+.order-history{
+    &_item{
+        &_progress{
+            max-width: 400px;
+        }
+        h3{
+            span{font-weight: bold;}
+        }
+        margin-bottom:20px;
+
+        &_date{
+            font-weight: bold;
+        }
+
+        &_products{
+            &_item{
+                display: flex;
+                margin-top: 10px;
+                margin-bottom: 14px;
+                &_image{
+                    max-width: 100px;
+                }
+
+                &_title{
+                    margin-left: 10px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

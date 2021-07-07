@@ -133,6 +133,11 @@ img {
     }
 }
 
+@mixin h5 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
 @mixin h4 {
     font-size: 24px;
     font-weight: normal;
