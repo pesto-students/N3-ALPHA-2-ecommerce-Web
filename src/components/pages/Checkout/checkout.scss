@@ -1,0 +1,59 @@
+@import '../../shared/Style/index.scss';
+
+.checkout-page {
+    @include sectionWidth;
+
+    &_title {
+        font-size: 24px;
+        font-weight: normal;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    &_subheading {
+        @include h5;
+        text-align: left;
+    }
+
+    &_content {
+        margin-top: $topSpacing;
+    }
+    &_wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        &_address {
+            width: 400px;
+        }
+        &_cart {
+            width: 440px;
+            .cartDetail {
+                position: static;
+                z-index: 0;
+                .cartDetail_top {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 1px solid $grey_ccc;
+                    padding-bottom: $paddingMd;
+                    font-weight: bold;
+                    &.amount {
+                        border-bottom: 0;
+                        border-top: 1px solid $grey_ccc;
+                        padding-top: $paddingMd;
+                        justify-content: space-around;
+                        font-size: 1.2rem;
+                        margin-top: $margin;
+                    }
+                }
+            }
+        }
+    }
+
+    &_payment-btn {
+        @include hyGenieBtn;
+        margin-top: 20px;
+        width: 100%;
+    }
+}
