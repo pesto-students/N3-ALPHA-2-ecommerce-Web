@@ -1,0 +1,7 @@
+import renderer from 'react-test-renderer';
+import Divider from './Divider';
+
+test('Divider Snapshot', () => {
+    const tree = renderer.create(<Divider />).toJSON();
+    expect(tree).toMatchSnapshot();
+});
