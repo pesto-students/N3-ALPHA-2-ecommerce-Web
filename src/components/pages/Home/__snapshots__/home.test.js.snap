@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Snapshot 1`] = `
+<div
+  className="fullPageWrap"
+>
+  <div
+    className="fullPageLoader"
+  />
+</div>
+`;

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Arrivals Snapshot 1`] = `
+<section
+  className="newArrivals"
+>
+  <h1
+    className="newArrivals_heading"
+  >
+    
+  </h1>
+  <div
+    className="newArrivals_content"
+  />
+</section>
+`;

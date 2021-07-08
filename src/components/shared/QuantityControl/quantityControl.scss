@@ -1,24 +1,23 @@
 @import '../../shared/Style/index.scss';
 
-.quantity-control{
+.quantity-control {
     width: 110px;
     display: flex;
     justify-content: space-between;
 
-    button{
-        width: 35PX;
+    button {
+        width: 35px;
         height: 35px;
         border-radius: 50%;
         color: $secondary-color;
         background-color: $grey-e5e5e5;
         cursor: pointer;
         font-weight: bold;
-        border: 1px solid $primary-color
-        
+        border: 1px solid $primary-color;
     }
 
-    h4{
+    h4 {
         font-weight: bold;
-        font-size: 18PX;
+        font-size: 18px;
     }
 }

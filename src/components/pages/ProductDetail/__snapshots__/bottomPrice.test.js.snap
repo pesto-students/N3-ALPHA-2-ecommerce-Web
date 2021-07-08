@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product Detail Snapshot 1`] = `
+<div
+  className="bottomPrice"
+>
+  <h2
+    className="bottomPrice_price"
+  >
+    ₹0
+    <span>
+      <del>
+        ₹0
+      </del>
+    </span>
+     
+  </h2>
+  <button
+    class="bottomPrice_btn"
+  >
+    Checkout
+  </button>
+</div>
+`;

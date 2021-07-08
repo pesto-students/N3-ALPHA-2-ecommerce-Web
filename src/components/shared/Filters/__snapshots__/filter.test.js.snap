@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter Snapshot 1`] = `
+<div
+  className="filters"
+>
+  <p
+    align="left"
+    className="filters_title"
+  >
+    price_text
+  </p>
+  <div
+    className="ant-slider ant-slider-with-marks"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div
+      className="ant-slider-rail"
+      style={Object {}}
+    />
+    <div
+      className="ant-slider-track ant-slider-track-1"
+      style={
+        Object {
+          "left": "0.00505024998737438%",
+          "right": "auto",
+          "width": "99.99494975001262%",
+        }
+      }
+    />
+    <div
+      className="ant-slider-step"
+    >
+      <span
+        className="ant-slider-dot"
+        style={
+          Object {
+            "left": "0.49997474875006315%",
+          }
+        }
+      />
+      <span
+        className="ant-slider-dot ant-slider-dot-active"
+        style={
+          Object {
+            "left": "100%",
+          }
+        }
+      />
+    </div>
+    <div
+      aria-disabled={false}
+      aria-valuemax={199}
+      aria-valuemin={0.99}
+      aria-valuenow={1}
+      className="ant-slider-handle ant-slider-handle-1"
+      onBlur={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      role="slider"
+      style={
+        Object {
+          "left": "0.00505024998737438%",
+          "right": "auto",
+          "transform": "translateX(-50%)",
+        }
+      }
+      tabIndex={0}
+    />
+    <div
+      aria-disabled={false}
+      aria-valuemax={199}
+      aria-valuemin={0.99}
+      aria-valuenow={199}
+      className="ant-slider-handle ant-slider-handle-2"
+      onBlur={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      role="slider"
+      style={
+        Object {
+          "left": "100%",
+          "right": "auto",
+          "transform": "translateX(-50%)",
+        }
+      }
+      tabIndex={0}
+    />
+    <div
+      className="ant-slider-mark"
+    >
+      <span
+        className="ant-slider-mark-text"
+        onMouseDown={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "left": "-0.49997474875006315%",
+            "msTransform": "translateX(-50%)",
+            "transform": "translateX(-50%)",
+          }
+        }
+      >
+        ₹0.99
+      </span>
+      <span
+        className="ant-slider-mark-text ant-slider-mark-text-active"
+        onMouseDown={[Function]}
+        onTouchStart={[Function]}
+        style={
+          Object {
+            "left": "100%",
+            "msTransform": "translateX(-50%)",
+            "transform": "translateX(-50%)",
+          }
+        }
+      >
+        ₹199
+      </span>
+    </div>
+  </div>
+</div>
+`;

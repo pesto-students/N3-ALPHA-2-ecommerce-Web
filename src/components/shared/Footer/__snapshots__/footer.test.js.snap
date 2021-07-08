@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Snapshot 1`] = `
+<footer
+  className="footer"
+>
+  <div
+    className="footer_content"
+  >
+    <p
+      className="footer_text"
+    >
+      © 2021 HyGenie || All Rights Reserved.
+    </p>
+  </div>
+</footer>
+`;
