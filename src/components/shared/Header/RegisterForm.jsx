@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import InputField from '../FormFields/InputField';
 import Button from '../FormFields/Button';
 import '../FormFields/form.scss';
+import { useTranslation } from 'react-i18next';
 
 const RegisterForm = (props) => {
     const {
@@ -11,12 +12,14 @@ const RegisterForm = (props) => {
         formData = {},
         loader = false,
     } = props;
+    const { t } = useTranslation();
+
     return (
         <form>
-            <h2>Register</h2>
+            <h2>{t('register_text')}</h2>
             <InputField
                 type={'text'}
-                placeholder={'Enter Name'}
+                placeholder={`${t('enter_text')} ${t('name_text')}`}
                 id={'name'}
                 name={'name'}
                 value={formData['name']}
@@ -24,7 +27,7 @@ const RegisterForm = (props) => {
             />
             <InputField
                 type={'email'}
-                placeholder={'Enter Email'}
+                placeholder={`${t('enter_text')} ${t('email_text')}`}
                 id={'email'}
                 name={'email'}
                 value={formData['email']}
@@ -32,14 +35,14 @@ const RegisterForm = (props) => {
             />
             <InputField
                 type={'password'}
-                placeholder={'Enter Password'}
+                placeholder={`${t('enter_text')} ${t('password_text')}`}
                 id={'password'}
                 name={'password'}
                 value={formData['password']}
                 onchangeHandler={onchangeHandler}
             />
             <Button
-                buttonLabel={'Register'}
+                buttonLabel={t('register_text')}
                 onclickHandler={(e) => handleRegister(e, 'register')}
                 loader={loader}
             />
@@ -48,12 +51,12 @@ const RegisterForm = (props) => {
             ) : (
                 <Fragment>
                     <p>
-                        Already have an account?{' '}
+                        {t('already_text')}
                         <span
                             className="header_signUp"
                             onClick={() => handleSignupClick()}
                         >
-                            Sign in
+                            {t('login')}
                         </span>
                     </p>
                 </Fragment>

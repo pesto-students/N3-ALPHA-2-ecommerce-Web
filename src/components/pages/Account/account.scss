@@ -26,6 +26,16 @@
             width: 80%;
             margin-left: 40px;
         }
+        &_empty {
+            text-align: center;
+            &_txt {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            &_btn {
+                @include hyGenieBtn;
+            }
+        }
     }
 
     // order history

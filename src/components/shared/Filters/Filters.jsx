@@ -1,5 +1,6 @@
 import { Slider } from 'antd';
 import './filters.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function Filters(props) {
     const marks = {
@@ -10,10 +11,12 @@ export default function Filters(props) {
     const handlePriceChange = (range) => {
         props.onFiltersChange({ price: range });
     };
+    const { t } = useTranslation();
+
     return (
         <div className="filters">
             <p className="filters_title" align="left">
-                Price range
+                {t('price_text')}
             </p>
             <Slider
                 onChange={handlePriceChange}
