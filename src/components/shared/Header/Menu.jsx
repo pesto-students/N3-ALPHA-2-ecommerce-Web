@@ -2,10 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import MobileMenu from './MobileMenu';
+import { useTranslation } from 'react-i18next';
 
 const Menu = (props) => {
     const { mobileMenu = false, handleMobileMenu, isMobileMenu } = props;
     const [currentCategory, setCurrentCategory] = useState('');
+    const { t } = useTranslation();
 
     useEffect(() => {
         const { category } = qs.parse(props.location.search);
@@ -42,7 +44,7 @@ const Menu = (props) => {
                             currentCategory === 'all' && 'menu_item_selected'
                         }`}
                     >
-                        All Products
+                        {t('product_all')}
                     </p>
                     <p
                         data-value="mask"
@@ -50,7 +52,7 @@ const Menu = (props) => {
                             currentCategory === 'mask' && 'menu_item_selected'
                         }`}
                     >
-                        Masks
+                        {t('product_mask')}
                     </p>
                     <p
                         data-value="sanitizer"
@@ -59,7 +61,7 @@ const Menu = (props) => {
                             'menu_item_selected'
                         }`}
                     >
-                        Sanitizers
+                        {t('product_sanitizer')}
                     </p>
                     <p
                         data-value="handwash"
@@ -68,7 +70,7 @@ const Menu = (props) => {
                             'menu_item_selected'
                         }`}
                     >
-                        Hand Wash
+                        {t('product_handWash')}
                     </p>
                     <p
                         data-value="gloves"
@@ -76,7 +78,7 @@ const Menu = (props) => {
                             currentCategory === 'gloves' && 'menu_item_selected'
                         }`}
                     >
-                        Gloves
+                        {t('product_gloves')}
                     </p>
 
                     <span className="menuBar">☰</span>

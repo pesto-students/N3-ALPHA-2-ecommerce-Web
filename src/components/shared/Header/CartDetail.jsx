@@ -3,15 +3,20 @@ import CartItem from './CartItem';
 import './cart.scss';
 import { CartContext } from '../Contexts/CartContext';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const CartDetail = ({ isCartOpen = false, handleCartClick }) => {
     const { cartItems, total = 0 } = useContext(CartContext);
     const wrapClass = isCartOpen ? 'show' : 'hide';
+    const { t } = useTranslation();
+
     return (
         <Fragment>
             <div className={`cartDetail ${wrapClass}`}>
                 <div className="cartDetail_top">
-                    <span className="cartDetail_head">Your cart</span>
+                    <span className="cartDetail_head">
+                        {t('your')} {t('cart')}
+                    </span>
                     <p
                         className="cartDetail_closeBtn"
                         onClick={(e) => handleCartClick(e)}
@@ -28,26 +33,26 @@ const CartDetail = ({ isCartOpen = false, handleCartClick }) => {
                         </div>
                         <div className="cartDetail_top amount">
                             <span className="cartDetail_head">
-                                Total Amount
+                                {t('total_text')}
                             </span>
                             <span className="cartDetail_head">
                                 &#8377; {total}
                             </span>
                         </div>
                         <Link to="/checkout" className="cartDetail_checkoutBtn">
-                            Checkout
+                            {t('checkout_text')}
                         </Link>
                     </Fragment>
                 ) : (
                     <div className="cartDetail_noitem">
                         <h2 className="cartDetail_noitem_head">
-                            No items in the cart
+                            {t('no_cart_text')}
                         </h2>
                         <Link
                             to="/products?category=all"
                             className="cartDetail_checkoutBtn"
                         >
-                            Shop Now
+                            {t('shop_text')}
                         </Link>
                     </div>
                 )}
