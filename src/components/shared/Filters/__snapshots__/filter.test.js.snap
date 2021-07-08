@@ -8,7 +8,7 @@ exports[`Filter Snapshot 1`] = `
     align="left"
     className="filters_title"
   >
-    Price range
+    price_text
   </p>
   <div
     className="ant-slider ant-slider-with-marks"
