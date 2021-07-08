@@ -90,7 +90,7 @@ function ProductDetailed(props) {
             props.history.push('/checkout');
         } else {
             const _product = {
-                img: `assets/${product.thumbnail}`,
+                img: `/assets/${product.thumbnail}`,
                 name: product.name,
                 price: product.price,
                 quantity: product.quantity,
@@ -161,7 +161,9 @@ function ProductDetailed(props) {
                                     )
                                 }
                             >
-                                {isInCart(product) ? 'Checkout' : 'Add to cart'}
+                                {isInCart(product)
+                                    ? t('checkout_text')
+                                    : t('addCart_text')}
                             </button>
                         </div>
                     </section>

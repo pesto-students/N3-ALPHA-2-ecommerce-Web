@@ -11,7 +11,7 @@
   "no_cart_text": "कार्ट में कोई सामग्री नहीं है",
   "total_text": "कुल राशि",
   "remove_text": "हटाएं ",
-  "checkout_text": "भुगतान करें",
+  "checkout_text": "चेक आउट",
   "profile_text": "प्रोफ़ाइल",
   "account_text": "खता",
   "logOut_text": "लॉग आउट",
@@ -34,5 +34,9 @@
   "addMore_text": "अधिक जोड़ें",
   "price_text": "मूल्य सीमा",
   "similar_text": "सामान्य उत्पाद",
-  "qty_text": "मात्रा "
+  "qty_text": "मात्रा ",
+  "shipping_text": "शिपिंग",
+  "address_text": "पता",
+  "addnewAdd_text": "नया पता जोड़ें",
+  "proceedPay_text": "भुगतान करें"
 }

@@ -34,5 +34,9 @@
   "addMore_text": "Add More",
   "price_text": "Price Range",
   "similar_text": "Similar Products",
-  "qty_text": "Quantity "
+  "qty_text": "Quantity ",
+  "shipping_text": "Shipping",
+  "address_text": "Address",
+  "addnewAdd_text": "Add New Address",
+  "proceedPay_text": "Proceed To Pay"
 }

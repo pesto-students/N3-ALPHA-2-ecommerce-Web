@@ -9,7 +9,7 @@ import { CartContext } from '../Contexts/CartContext';
 import CartDetail from './CartDetail';
 import { getLocalStorage } from '../../../helper/Utils';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
+import LanguageSwitch from './LanguageSwitch';
 
 const Header = (props) => {
     const { cartItems = [] } = useContext(CartContext);
@@ -72,6 +72,7 @@ const Header = (props) => {
                         placeholder={t('search_placeholder')}
                     />
                 </form>
+                <LanguageSwitch />
                 <div
                     className="header_cart"
                     onClick={(e) => handleCartClick(e)}
@@ -158,7 +159,6 @@ const Header = (props) => {
                     placeholder={t('search_placeholder')}
                 />
             </form>
-            <LanguageSwitch />
         </header>
     );
 };

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import api from '../../../services/api';
 import './addresses.scss';
 import { toaster } from '../../../helper/Utils';
+import { useTranslation } from 'react-i18next';
 
 function AddressItem(props) {
     const {
@@ -15,6 +16,7 @@ function AddressItem(props) {
         editMode,
         draftMode,
     } = props;
+    const { t } = useTranslation();
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -135,6 +137,7 @@ function Addresses(props) {
     const [currentId, setCurrentId] = useState(null);
     const [addresses, setAddresses] = useState([]);
     const [defaultAddresses, setDefaultAddresses] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         getAllAddresses();
@@ -199,7 +202,7 @@ function Addresses(props) {
             ))}
 
             <button className="addresses_btn-add" onClick={handleAddNew}>
-                Add new address
+                {t('addnewAdd_text')}
             </button>
         </div>
     );
