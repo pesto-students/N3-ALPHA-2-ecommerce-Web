@@ -1,12 +1,32 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useEffect } from 'react';
 import CartItem from './CartItem';
 import './cart.scss';
 import { CartContext } from '../Contexts/CartContext';
 import { Link } from 'react-router-dom';
+import api from '../../../services/api';
+import { getUniqueObjectArrayByKey } from '../../../helper/Utils';
+import firebase from 'firebase';
 
 const CartDetail = ({ isCartOpen = false, handleCartClick }) => {
-    const { cartItems, total = 0 } = useContext(CartContext);
+    const { cartItems, total = 0, syncCart } = useContext(CartContext);
     const wrapClass = isCartOpen ? 'show' : 'hide';
+
+    useEffect(() => {
+        /* Sync cart if the user is authenticated */
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                api.cart.get(user.uid).then((remoteCart) => {
+                    const combinedCart = getUniqueObjectArrayByKey('id', [
+                        ...cartItems,
+                        ...(remoteCart || []),
+                    ]);
+
+                    syncCart(combinedCart);
+                });
+            }
+        });
+    }, []);
+
     return (
         <Fragment>
             <div className={`cartDetail ${wrapClass}`}>

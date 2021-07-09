@@ -87,3 +87,7 @@ export const getRandomArrayItem = (arr = [], number) => {
 export const sliceArray = (arr = [], start, end) => {
     return arr.slice(start, end);
 };
+
+export const getUniqueObjectArrayByKey = (key, array) => {
+    return [...new Map(array.map((item) => [item[key], item])).values()];
+};

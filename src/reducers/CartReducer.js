@@ -1,4 +1,3 @@
-import { update } from 'lodash';
 import { setLocalStorage } from '../helper/Utils';
 import { toaster } from '../helper/Utils';
 import api from '../services/api';
@@ -21,12 +20,10 @@ export const sumItems = (cartItems) => {
 
 const updateRemoteCart = (cart) => {
     const isAuthenticated = localStorage.userDetails;
-    console.log('upated cart');
     if (Boolean(isAuthenticated)) {
+        console.log('upated cart');
         console.log('AUTH');
-        api.cart
-            .update(cart)
-            .then((res) => toaster('updated cart', 3000, 'erro'));
+        api.cart.update(cart);
     }
     return;
 };
@@ -110,6 +107,16 @@ export const CartReducer = (state, action) => {
             updatedState = {
                 cartItems: [],
                 ...sumItems([]),
+            };
+
+            updateRemoteCart(updatedState.cartItems);
+            return updatedState;
+
+        case 'SYNC':
+            console.log('SYNCED CART', action.payload);
+            updatedState = {
+                cartItems: action.payload,
+                ...sumItems(action.payload),
             };
 
             updateRemoteCart(updatedState.cartItems);
