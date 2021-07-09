@@ -51,9 +51,13 @@ function ProductDetailed(props) {
         const { id } = props.match.params;
         api.product.getById(id).then((snapshot) => {
             const product = snapshot.val();
-            product.id = id;
-            setProduct(product);
-            window.scrollTo(0, 0);
+            if (product) {
+                product.id = id;
+                setProduct(product);
+                window.scrollTo(0, 0);
+            } else {
+                props.history.push('/products?category=all');
+            }
         });
     }, [props.match.params.id]);
 
