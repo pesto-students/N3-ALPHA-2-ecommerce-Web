@@ -9,9 +9,11 @@ import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import ProductItem from '../../shared/ProductItem/ProdcutItem';
 import QuantityControl from '../../shared/QuantityControl/QuantityControl';
 import BottomMobilePrice from './BottomMobilePrice';
+import { useTranslation } from 'react-i18next';
 import './productDetail.scss';
 
 function ProductDetailed(props) {
+    const { t } = useTranslation();
     const [product, setProduct] = useState({
         id: '',
         name: '',
@@ -133,7 +135,7 @@ function ProductDetailed(props) {
                             <Divider />
 
                             <p className="product-detailed_details_count">
-                                Quantity
+                                {t('qty_text')}
                             </p>
 
                             <p className="cartItem_text">
@@ -180,13 +182,15 @@ function ProductDetailed(props) {
                                     )
                                 }
                             >
-                                {isInCart(product) ? 'Checkout' : 'Add to cart'}
+                                {isInCart(product)
+                                    ? t('checkout_text')
+                                    : t('addCart_text')}
                             </button>
                         </div>
                     </section>
                     <section className="product-detailed_similar_section">
                         <h4 className="product-detailed_details_name">
-                            Similar products
+                            {t('similar_text')}
                         </h4>
                         <div className="product-detailed_similar_section_products">
                             {similarProducts.map(

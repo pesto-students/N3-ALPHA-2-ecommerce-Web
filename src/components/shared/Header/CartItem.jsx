@@ -1,10 +1,13 @@
 import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../Contexts/CartContext';
+import { useTranslation } from 'react-i18next';
 
 const CartItem = ({ product }) => {
     const { increase, decrease, removeProduct } = useContext(CartContext);
     const { id = '', name = '', img = '', quantity, price = 0 } = product;
+    const { t } = useTranslation();
+
     return (
         <Fragment>
             <div className="cartItem">
@@ -47,7 +50,7 @@ const CartItem = ({ product }) => {
                     className="cartItem_remove"
                     onClick={() => removeProduct(product)}
                 >
-                    Remove
+                    {t('remove_text')}
                 </p>
             </div>
         </Fragment>

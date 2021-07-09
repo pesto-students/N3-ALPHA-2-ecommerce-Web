@@ -13,25 +13,27 @@
         &_progress{
             max-width: 400px;
         }
-        h3{
-            span{font-weight: bold;}
+        h3 {
+            span {
+                font-weight: bold;
+            }
         }
-        margin-bottom:20px;
+        margin-bottom: 20px;
 
-        &_date{
+        &_date {
             font-weight: bold;
         }
 
-        &_products{
-            &_item{
+        &_products {
+            &_item {
                 display: flex;
                 margin-top: 10px;
                 margin-bottom: 14px;
-                &_image{
+                &_image {
                     max-width: 100px;
                 }
 
-                &_title{
+                &_title {
                     margin-left: 10px;
                     font-weight: bold;
                 }

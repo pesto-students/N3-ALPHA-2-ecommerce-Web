@@ -1,33 +1,33 @@
 @import '../../shared/Style/index.scss';
 
-.addresses{
+.addresses {
     text-align: left;
     max-width: 380px;
 
-    &_btn-add{
+    &_btn-add {
         @include hyGenieBtn;
         width: 100%;
         margin-top: 20px;
-
     }
 
-    &_address{
-        &_item{
+    &_address {
+        &_item {
             margin-bottom: 10px;
             display: flex;
             justify-content: space-around;
+            align-items: center;
 
-            &_content{
+            &_content {
                 width: 300px;
                 margin-left: 10px;
             }
 
-            &_textarea{
+            &_textarea {
                 width: 100%;
                 height: 100px;
             }
 
-            &_btn{
+            &_btn {
                 padding: 0px;
                 height: 30px;
                 width: 30px;

@@ -2,16 +2,17 @@ import React, { useContext, useState } from 'react';
 import CartItem from '../../shared/Header/CartItem';
 import '../../shared/Header/cart.scss';
 import { CartContext } from '../../shared/Contexts/CartContext';
-import { Link } from 'react-router-dom';
 import Addresses from '../../shared/Addresses/Addresses';
 import './checkout.scss';
 import firebase from 'firebase';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import { baseURL } from '../../../services/api/config';
+import { useTranslation } from 'react-i18next';
 
 function Checkout(props) {
     const { cartItems, total = 0 } = useContext(CartContext);
     const [isLoading, setIsLoading] = useState(false);
+    const { t } = useTranslation();
 
     const handlePayment = () => {
         setIsLoading(true);
@@ -56,13 +57,15 @@ function Checkout(props) {
 
             <div className="checkout-page">
                 <div className="checkout-page_content">
-                    <h4 className="checkout-page_title">Checkout</h4>
+                    <h4 className="checkout-page_title">
+                        {t('checkout_text')}
+                    </h4>
 
                     <section className="checkout-page_wrapper">
                         {/* Shipping Address */}
                         <div className="checkout-page_wrapper_address">
                             <h5 className="checkout-page_subheading">
-                                Shipping address
+                                {t('shipping_text')} {t('address_text')}
                             </h5>
                             <div className="checkout-page_wrapper_addresses">
                                 <Addresses />
@@ -81,7 +84,7 @@ function Checkout(props) {
                                 </div>
                                 <div className="cartDetail_top amount">
                                     <span className="cartDetail_head">
-                                        Total Amount
+                                        {t('total_text')}
                                     </span>
                                     <span className="cartDetail_head">
                                         &#8377; {total}
@@ -92,7 +95,7 @@ function Checkout(props) {
                                 className="checkout-page_payment-btn"
                                 onClick={handlePayment}
                             >
-                                Porceed to pay
+                                {t('proceedPay_text')}
                             </button>
                         </div>
                     </section>

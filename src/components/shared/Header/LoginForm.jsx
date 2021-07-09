@@ -3,6 +3,7 @@ import InputField from '../FormFields/InputField';
 import Button from '../FormFields/Button';
 import { googleAuth } from '../../../services/api/firebaseMethods';
 import '../FormFields/form.scss';
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = (props) => {
     const {
@@ -13,15 +14,14 @@ const LoginForm = (props) => {
         handleSocialLogin,
         loader = false,
     } = props;
+    const { t } = useTranslation();
 
     return (
         <form className="loginRegForm">
-            <h2 className="loginRegForm_head">
-                Already Have an Account ? Login Here
-            </h2>
+            <h2 className="loginRegForm_head">{t('login_head')}</h2>
             <InputField
                 type={'email'}
-                placeholder={'Enter Email'}
+                placeholder={`${t('enter_text')} ${t('email_text')}`}
                 id={'email'}
                 name={'email'}
                 value={loginData['email']}
@@ -29,14 +29,14 @@ const LoginForm = (props) => {
             />
             <InputField
                 type={'password'}
-                placeholder={'Enter Password'}
+                placeholder={`${t('enter_text')} ${t('password_text')}`}
                 id={'password'}
                 name={'password'}
                 value={loginData['password']}
                 onchangeHandler={onchangeHandler}
             />
             <Button
-                buttonLabel={'Login'}
+                buttonLabel={t('login')}
                 onclickHandler={(e) => handleLogin(e, 'login')}
                 loader={loader}
             />
@@ -53,15 +53,15 @@ const LoginForm = (props) => {
                             className="socialIcon"
                             alt="social login"
                         />{' '}
-                        <span>Continue With Google</span>
+                        <span>{t('google_text')}</span>
                     </p>
                     <p>
-                        Don't have an account?{' '}
+                        {t('donot_account_text')}
                         <span
                             className="header_signUp"
                             onClick={() => handleSignupClick()}
                         >
-                            Create an Account
+                            {t('create_text')}
                         </span>
                     </p>
                 </Fragment>

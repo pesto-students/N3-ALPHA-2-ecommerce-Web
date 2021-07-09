@@ -38,7 +38,7 @@
         margin-bottom: 0;
 
         &_form {
-            width: 34%;
+            width: 32%;
         }
     }
     &_login {
@@ -78,7 +78,7 @@
 
     // menu css here
     .menu {
-        width: 44%;
+        width: 42%;
         &_item {
             margin: 0;
             display: inline-block;
@@ -179,6 +179,43 @@
 }
 .header_login:hover .userMenu {
     display: block;
+}
+
+//multilanguage
+.multilang {
+    position: relative;
+    cursor: pointer;
+    &_icon {
+        width: 30px;
+        padding-bottom: 10px;
+    }
+    &_drop {
+        display: none;
+        box-shadow: 0 12px 15px 0 #0000004d;
+        padding: 12px;
+        text-align: left;
+        border-radius: 4px;
+        position: absolute;
+        background: $white;
+        right: 0;
+        width: 100%;
+        min-width: 100px;
+        &_list {
+            margin: 0;
+            padding-bottom: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            cursor: pointer;
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+    &:hover {
+        .multilang_drop {
+            display: block;
+        }
+    }
 }
 
 .loginOverlay {
@@ -336,7 +373,7 @@
             width: 30%;
             text-align: left;
             &-img {
-                max-width: 100px;
+                max-width: 90px;
             }
         }
         &_search_form {

@@ -8,11 +8,14 @@ import qs from 'query-string';
 import { CartContext } from '../Contexts/CartContext';
 import CartDetail from './CartDetail';
 import { getLocalStorage } from '../../../helper/Utils';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitch from './LanguageSwitch';
 
 const Header = (props) => {
     const { cartItems = [] } = useContext(CartContext);
     const totalItem = cartItems.length;
     const userDetails = getLocalStorage('userDetails');
+    const { t } = useTranslation();
     const {
         loginModal,
         signUp,
@@ -66,9 +69,10 @@ const Header = (props) => {
                         name="search"
                         className="header_search"
                         type="text"
-                        placeholder="Search for products"
+                        placeholder={t('search_placeholder')}
                     />
                 </form>
+                <LanguageSwitch />
                 <div
                     className="header_cart"
                     onClick={(e) => handleCartClick(e)}
@@ -79,8 +83,7 @@ const Header = (props) => {
                         alt="Cart Icon"
                     />
                     <span className="header_cart-text">
-                        Cart(
-                        {totalItem ? totalItem : 0})
+                        {t('cart')}({totalItem ? totalItem : 0})
                     </span>
                 </div>
                 <CartDetail
@@ -95,16 +98,19 @@ const Header = (props) => {
                     />
                     {userDetails ? (
                         <Fragment>
-                            <span className="header_login-text">Profile</span>
+                            <span className="header_login-text">
+                                {' '}
+                                {t('profile_text')}
+                            </span>
                             <div className="userMenu">
                                 <Link to="/account" className="userMenu_item">
-                                    Account
+                                    {t('account_text')}
                                 </Link>
                                 <p
                                     className="userMenu_item"
                                     onClick={() => logOut()}
                                 >
-                                    Logout
+                                    {t('logOut_text')}
                                 </p>
                             </div>
                         </Fragment>
@@ -113,7 +119,7 @@ const Header = (props) => {
                             className="header_login-text"
                             onClick={() => handleLoginClick()}
                         >
-                            Login
+                            {t('login')}
                         </span>
                     )}
                 </div>
@@ -150,7 +156,7 @@ const Header = (props) => {
                     name="search"
                     className="mobileMenu_search_input"
                     type="text"
-                    placeholder="Search for products"
+                    placeholder={t('search_placeholder')}
                 />
             </form>
         </header>
