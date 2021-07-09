@@ -4,7 +4,7 @@ async function update(addresses) {
     const { uid } = JSON.parse(localStorage.userDetails);
 
     const ref = firebase.database().ref(`users/${uid}`);
-    return await ref.set({
+    return await ref.update({
         addresses,
     });
 }

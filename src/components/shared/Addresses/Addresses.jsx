@@ -3,6 +3,7 @@ import api from '../../../services/api';
 import './addresses.scss';
 import { toaster } from '../../../helper/Utils';
 import { useTranslation } from 'react-i18next';
+import user from '../../../services/api/user';
 
 function AddressItem(props) {
     const {
@@ -83,7 +84,7 @@ function AddressItem(props) {
                 />
             )}
             <div className="addresses_address_item_content">
-                {isEditing ? (
+                {isEditing || draftMode ? (
                     <textarea
                         value={defaultText}
                         className="addresses_address_item_textarea"
@@ -138,6 +139,7 @@ function Addresses(props) {
     const [addresses, setAddresses] = useState([]);
     const [defaultAddresses, setDefaultAddresses] = useState([]);
     const { t } = useTranslation();
+    const [isEmpty, setIsEmpty] = useState(false);
 
     useEffect(() => {
         getAllAddresses();
@@ -146,11 +148,13 @@ function Addresses(props) {
     const getAllAddresses = async () => {
         try {
             const snapshot = await api.address.getAll();
-            let addresses = (await snapshot.val().addresses) || [];
+            let userData = await snapshot.val();
+            let addresses = userData ? userData.addresses : [];
             addresses = addresses.map((address, id) => {
                 address.id = id;
                 return address;
             });
+            if (!addresses.length) setIsEmpty(true); // Prompt user to add address if there are none
             setAddresses(addresses);
             setDefaultAddresses(JSON.parse(JSON.stringify(addresses))); // keep a copy to undo chanegs when cancel is clicked
         } catch (err) {
@@ -166,12 +170,13 @@ function Addresses(props) {
         const id = addresses.length;
         setIsNewClicked(true);
         setCurrentId(id);
+        setIsEmpty(false);
         const newAddress = { id, text: '', default: false };
         onChange([...addresses, newAddress]);
     };
 
     const handleUpdate = (addresses) => {
-        console.log(addresses);
+        setIsNewClicked(false);
         api.address.update(addresses).then((res) => {
             getAllAddresses();
             toaster('Addresses have been updated!', 3000, 'success');
@@ -184,22 +189,28 @@ function Addresses(props) {
 
     return (
         <div className="addresses">
-            {addresses.map((address) => (
-                <AddressItem
-                    key={address.id}
-                    id={address.id}
-                    text={address.text}
-                    isDefault={address.default}
-                    onChange={onChange}
-                    onUpdate={handleUpdate}
-                    onCancel={handleCancel}
-                    addresses={addresses}
-                    editMode={currentId && currentId === address.id}
-                    draftMode={
-                        currentId && currentId === address.id && isNewClicked // true when add new  is clicked
-                    }
-                />
-            ))}
+            {isEmpty ? (
+                <h3>You haven't added any addresses yet</h3>
+            ) : (
+                addresses.map((address) => (
+                    <AddressItem
+                        key={address.id}
+                        id={address.id}
+                        text={address.text}
+                        isDefault={address.default}
+                        onChange={onChange}
+                        onUpdate={handleUpdate}
+                        onCancel={handleCancel}
+                        addresses={addresses}
+                        editMode={currentId && currentId === address.id}
+                        draftMode={
+                            currentId &&
+                            currentId === address.id &&
+                            isNewClicked // true when add new  is clicked
+                        }
+                    />
+                ))
+            )}
 
             <button className="addresses_btn-add" onClick={handleAddNew}>
                 {t('addnewAdd_text')}
