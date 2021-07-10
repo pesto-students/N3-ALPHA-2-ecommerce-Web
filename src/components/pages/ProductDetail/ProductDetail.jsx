@@ -80,7 +80,7 @@ function ProductDetailed(props) {
 
     const handleAddProduct = () => {
         const _product = {
-            img: `assets/${product.thumbnail}`,
+            img: `/assets/${product.thumbnail}`,
             name: product.name,
             price: product.price,
             quantity: product.quantity,
