@@ -33,12 +33,17 @@ const CartContextProvider = ({ children }) => {
         dispatch({ type: 'CLEAR' });
     };
 
+    const syncCart = (payload) => {
+        dispatch({ type: 'SYNC', payload });
+    };
+
     const contextValues = {
         addProduct,
         removeProduct,
         increase,
         decrease,
         clearCart,
+        syncCart,
         ...state,
     };
 

@@ -24,8 +24,15 @@ function ProductDetailed(props) {
         quantity: 10,
     });
 
+    const [cartProduct, setCartProduct] = useState({
+        id: '',
+        name: '',
+        img: '',
+        quantity: 1,
+        price: 0,
+    });
+
     const [currentImage, setCurrentImage] = useState('');
-    const [quantity, setQuantity] = useState(0);
 
     // Fetch similar products
     const similarProducts = useGetAllProducts().filter(
@@ -39,18 +46,18 @@ function ProductDetailed(props) {
         return !!cartItems.find((item) => item.id === product.id);
     };
 
-    // const { quantity: _quantity } = cartItems.find(
-    //     (item) => item.id === product.id
-    // );
-
-    // Fetch product by id based on route params
+    // Fetch product details by id based on route params
     useEffect(() => {
         const { id } = props.match.params;
         api.product.getById(id).then((snapshot) => {
             const product = snapshot.val();
-            product.id = id;
-            setProduct(product);
-            window.scrollTo(0, 0);
+            if (product) {
+                product.id = id;
+                setProduct(product);
+                window.scrollTo(0, 0);
+            } else {
+                props.history.push('/products?category=all');
+            }
         });
     }, [props.match.params.id]);
 
@@ -62,41 +69,31 @@ function ProductDetailed(props) {
 
     const shareUrl = window.location.href;
     const { images = [] } = product;
-    // if product is in cart, fetch quanitiy from cart
+
+    // fetch product from cart
     useEffect(() => {
-        console.log('CART', cartItems);
-        if (isInCart(product)) {
-            const { quantity } = cartItems.find(
-                (item) => item.id === product.id
-            );
-            setProduct({ ...product, quantity });
-        }
+        const { id } = props.match.params;
+
+        const cartProduct = cartItems.find((item) => item.id === id);
+        if (cartProduct) setCartProduct(cartProduct);
     }, [cartItems]);
 
-    const handleQuantityChange = (quantity) => {
-        if (product.id) {
-            setQuantity((prevQuantity) => {
-                if (isInCart(product))
-                    prevQuantity < quantity
-                        ? increase(product)
-                        : decrease(product);
-                return quantity;
-            });
-        }
+    const handleAddProduct = () => {
+        const _product = {
+            img: `assets/${product.thumbnail}`,
+            name: product.name,
+            price: product.price,
+            quantity: product.quantity,
+            id: product.id,
+        };
+        addProduct(_product);
     };
 
     const handleClick = (type) => {
         if (type === 'checkout') {
             props.history.push('/checkout');
         } else {
-            const _product = {
-                img: `/assets/${product.thumbnail}`,
-                name: product.name,
-                price: product.price,
-                quantity: product.quantity,
-                id: product.id,
-            };
-            addProduct(_product);
+            handleAddProduct();
         }
     };
 
@@ -144,10 +141,38 @@ function ProductDetailed(props) {
                             <p className="product-detailed_details_count">
                                 {t('qty_text')}
                             </p>
-                            <QuantityControl
-                                onChange={handleQuantityChange}
-                                quantity={quantity}
-                            />
+
+                            <p className="cartItem_text">
+                                <button
+                                    className="cartItem_btn"
+                                    onClick={() => {
+                                        if (isInCart(cartProduct)) {
+                                            increase(cartProduct);
+                                        } else {
+                                            handleAddProduct();
+                                        }
+                                    }}
+                                    title="Increase Quantity"
+                                >
+                                    +
+                                </button>
+                                <span className="cartItem_qty">
+                                    {cartProduct.quantity}
+                                </span>
+                                {
+                                    <button
+                                        className="cartItem_btn"
+                                        onClick={() => {
+                                            if (cartProduct.quantity < 2)
+                                                return;
+                                            else decrease(cartProduct);
+                                        }}
+                                        title="Decrease Quantity"
+                                    >
+                                        -
+                                    </button>
+                                }
+                            </p>
 
                             {/* Proceed to checkout if item is in cart else add to cart */}
 
