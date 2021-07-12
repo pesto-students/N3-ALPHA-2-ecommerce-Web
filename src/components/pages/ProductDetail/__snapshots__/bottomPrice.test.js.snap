@@ -17,8 +17,9 @@ exports[`Product Detail Snapshot 1`] = `
   </h2>
   <button
     class="bottomPrice_btn"
+    onClick={[Function]}
   >
-    Checkout
+    addCart_text
   </button>
 </div>
 `;
