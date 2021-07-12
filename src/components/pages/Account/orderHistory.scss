@@ -1,16 +1,16 @@
-.order-history{
-
-    &_empty-state{
-        display: flex ;
+.order-history {
+    &_empty-state {
+        display: flex;
         flex-direction: column;
+        align-items: center;
 
-        &_image{
+        &_image {
             width: 400px;
             opacity: 0.9;
         }
     }
-    &_item{
-        &_progress{
+    &_item {
+        &_progress {
             max-width: 400px;
         }
         h3 {

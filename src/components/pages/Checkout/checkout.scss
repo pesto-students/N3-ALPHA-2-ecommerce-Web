@@ -48,6 +48,9 @@
                     }
                 }
             }
+            .cartDetail_noitem {
+                padding-bottom: 20px;
+            }
         }
     }
 
@@ -55,5 +58,43 @@
         @include hyGenieBtn;
         margin-top: 20px;
         width: 100%;
+    }
+}
+
+// desktop and ipad pro
+@media only screen and (min-width: $mediaLaptopMin) and (max-width: $mediaLaptopMax) {
+}
+
+// for  tablets
+@media (max-width: $mediaTabMax) {
+    .checkout-page {
+        &_content {
+            margin-top: 20px;
+        }
+        &_wrapper {
+            &_address {
+                width: 100%;
+            }
+            &_cart {
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+// For mobile device
+@media (max-width: $mediaTabMin) {
+    .checkout-page {
+        &_content {
+            margin-top: 20px;
+        }
+        &_wrapper {
+            &_address {
+                width: 100%;
+            }
+            &_cart {
+                margin-top: 20px;
+            }
+        }
     }
 }
