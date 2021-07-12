@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, Fragment } from 'react';
 import CartItem from '../../shared/Header/CartItem';
 import '../../shared/Header/cart.scss';
 import { CartContext } from '../../shared/Contexts/CartContext';
@@ -8,11 +8,13 @@ import firebase from 'firebase';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import { baseURL } from '../../../services/api/config';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 function Checkout(props) {
-    const { cartItems, total = 0 } = useContext(CartContext);
+    const { cartItems, total = 0, clearCart } = useContext(CartContext);
     const [isLoading, setIsLoading] = useState(false);
     const { t } = useTranslation();
+    const isAuthenticated = localStorage.userDetails;
 
     const handlePayment = () => {
         setIsLoading(true);
@@ -51,56 +53,81 @@ function Checkout(props) {
             });
     };
 
+    useEffect(() => {
+        document.title = 'Checkout | HyGenie';
+    }, []);
+
     return (
         <>
-            {isLoading && <FullPageLoader />}
+            {isAuthenticated ? (
+                <Fragment>
+                    {isLoading && <FullPageLoader />}
+                    <div className="checkout-page">
+                        <div className="checkout-page_content">
+                            <h4 className="checkout-page_title">
+                                {t('checkout_text')}
+                            </h4>
 
-            <div className="checkout-page">
-                <div className="checkout-page_content">
-                    <h4 className="checkout-page_title">
-                        {t('checkout_text')}
-                    </h4>
-
-                    <section className="checkout-page_wrapper">
-                        {/* Shipping Address */}
-                        <div className="checkout-page_wrapper_address">
-                            <h5 className="checkout-page_subheading">
-                                {t('shipping_text')} {t('address_text')}
-                            </h5>
-                            <div className="checkout-page_wrapper_addresses">
-                                <Addresses />
-                            </div>
-                        </div>
-                        {/* Cart items */}
-                        <div className="checkout-page_wrapper_cart">
-                            <div className="cartDetail">
-                                <div className="cartDetail_content">
-                                    {cartItems.map((product) => (
-                                        <CartItem
-                                            key={product.id}
-                                            product={product}
-                                        />
-                                    ))}
+                            <section className="checkout-page_wrapper">
+                                {/* Shipping Address */}
+                                <div className="checkout-page_wrapper_address">
+                                    <h5 className="checkout-page_subheading">
+                                        {t('shipping_text')} {t('address_text')}
+                                    </h5>
+                                    <div className="checkout-page_wrapper_addresses">
+                                        <Addresses />
+                                    </div>
                                 </div>
-                                <div className="cartDetail_top amount">
-                                    <span className="cartDetail_head">
-                                        {t('total_text')}
-                                    </span>
-                                    <span className="cartDetail_head">
-                                        &#8377; {total}
-                                    </span>
+                                {/* Cart items */}
+                                <div className="checkout-page_wrapper_cart">
+                                    <div className="cartDetail">
+                                        <div className="cartDetail_content">
+                                            {cartItems.length > 0 ? (
+                                                cartItems.map((product) => (
+                                                    <CartItem
+                                                        key={product.id}
+                                                        product={product}
+                                                    />
+                                                ))
+                                            ) : (
+                                                <div className="cartDetail_noitem">
+                                                    <h2 className="cartDetail_noitem_head">
+                                                        {t('no_cart_text')}
+                                                    </h2>
+                                                    <Link
+                                                        to="/products?category=all"
+                                                        className="cartDetail_checkoutBtn"
+                                                    >
+                                                        {t('shop_text')}
+                                                    </Link>
+                                                </div>
+                                            )}
+                                        </div>
+                                        {cartItems.length > 0 && (
+                                            <div className="cartDetail_top amount">
+                                                <span className="cartDetail_head">
+                                                    {t('total_text')}
+                                                </span>
+                                                <span className="cartDetail_head">
+                                                    &#8377; {total}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <button
+                                        className="checkout-page_payment-btn"
+                                        onClick={handlePayment}
+                                    >
+                                        {t('proceedPay_text')}
+                                    </button>
                                 </div>
-                            </div>
-                            <button
-                                className="checkout-page_payment-btn"
-                                onClick={handlePayment}
-                            >
-                                {t('proceedPay_text')}
-                            </button>
+                            </section>
                         </div>
-                    </section>
-                </div>
-            </div>
+                    </div>
+                </Fragment>
+            ) : (
+                (window.location.href = '/')
+            )}
         </>
     );
 }

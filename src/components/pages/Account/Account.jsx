@@ -34,6 +34,7 @@ const Account = () => {
                 setOrders(orders);
             }
         });
+        document.title = 'Order History | HyGenie';
     }, []);
 
     return (
