@@ -1,14 +1,26 @@
 import { Steps } from 'antd';
-import './orderHistory.scss';
-import { Link } from 'react-router-dom';
-import Divider from '../../shared/Divider/Divider';
+import { Link, withRouter } from 'react-router-dom';
 import { getFormattedDate } from '../../../helper/Utils';
+import Divider from '../../shared/Divider/Divider';
+import './orderHistory.scss';
+import { useEffect, useContext } from 'react';
+import qs from 'query-string';
+import { CartContext } from '../../shared/Contexts/CartContext';
 
 const { Step } = Steps;
 
-export default function OrderHistory(props) {
+function OrderHistory(props) {
     const { orders } = props;
-    console.log(orders);
+    const { clearCart } = useContext(CartContext);
+
+    useEffect(() => {
+        // clear cart when redirected successully from checkout
+        const { checkout } = qs.parse(window.location.search);
+        if (checkout && checkout === 'true') {
+            clearCart();
+        }
+    }, [clearCart]);
+
     return (
         <div className="order-history">
             {!orders.length ? (
@@ -67,3 +79,5 @@ export default function OrderHistory(props) {
         </div>
     );
 }
+
+export default withRouter(OrderHistory);
