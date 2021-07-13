@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">HyGenie</h3>
+  
+  <p align="center">
+    <br />
+    <br />
+    <a href="https://hygenie.netlify.app/">Live URL</a>
+    ·
+    <a href="https://docs.google.com/document/d/115LHFTQ7zUymyhWSdZ_EssW70SuDkqPAoypAxJsYqWo">Documentation</a>
+    ·
+  </p>
+</p>
 
-## Available Scripts
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-In the project directory, you can run:
+<!-- ABOUT THE PROJECT -->
 
-### `yarn start`
+## About The Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Product Name Screen Shot][product-screenshot]](https://hygenie.netlify.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+HyGenie is an unique idea of selling Masks, Sanitizers, Gloves and Hand Wash which is now the essential part of our day to day life. In this pandemic situation we were short of these products and it was not available easily so from now HyGenie will take care of all these essential products.
 
-### `yarn test`
+Vision:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Provide a seamless shopping experience to worldwide customers.
+- Authentic and original products
+- Websites can be accessed in any language with multilingual support to any part of the world.
 
-### `yarn build`
+Goals:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- To make a better shopping experience all over the world.
+- Affordable to all ranges of customers at best price.
+- Customers can order the products on the go even with their mobile device with ease.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Built With
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [React Js](https://reactjs.org/)
+- [Firebase](https://firebase.google.com/)
+- [Stripe](https://stripe.com/en-in)
+- [Netlify](https://www.netlify.com/)
 
-### `yarn eject`
+<!-- GETTING STARTED -->
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Following are the simple steps to run this project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Prerequisites
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clone the repo
+   ```sh
+   git clone https://github.com/pesto-students/N3-ALPHA-2-ecommerce-Web.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run
+   ```sh
+   npm start
+   ```
+4. Open http://localhost:3000 to view it in the browser
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- CONTACT -->
 
-### Code Splitting
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Rohit Ranjan - [GiHub](https://github.com/rodeveloper9) - rohitdeveloper9@gmail.com
 
-### Analyzing the Bundle Size
+Imthiaz Ali - [GiHub](https://github.com/imthiazSD) - imthiazdev@gmail.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-### Making a Progressive Web App
+[product-screenshot]: images/screenshot.png
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+{"mode":"full","isActive":false}
