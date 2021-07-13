@@ -32,6 +32,10 @@ function Products(props) {
         setProducts(allProducts);
     }, [allProducts]);
 
+    useEffect(() => {
+        document.title = 'HyGenie : Stay Home Stay Safe';
+    });
+
     return (
         <Fragment>
             {products.length > 0 ? (

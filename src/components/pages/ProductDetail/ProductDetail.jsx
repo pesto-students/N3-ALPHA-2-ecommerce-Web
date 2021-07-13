@@ -7,13 +7,14 @@ import Divider from '../../shared/Divider/Divider';
 import useGetAllProducts from '../../shared/Hooks/useGetAllProducts';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import ProductItem from '../../shared/ProductItem/ProdcutItem';
-import QuantityControl from '../../shared/QuantityControl/QuantityControl';
 import BottomMobilePrice from './BottomMobilePrice';
 import { useTranslation } from 'react-i18next';
+import { toaster } from '../../../helper/Utils';
 import './productDetail.scss';
 
 function ProductDetailed(props) {
     const { t } = useTranslation();
+    const isAuthenticated = localStorage.userDetails;
     const [product, setProduct] = useState({
         id: '',
         name: '',
@@ -80,7 +81,7 @@ function ProductDetailed(props) {
 
     const handleAddProduct = () => {
         const _product = {
-            img: `assets/${product.thumbnail}`,
+            img: `/assets/${product.thumbnail}`,
             name: product.name,
             price: product.price,
             quantity: product.quantity,
@@ -91,7 +92,11 @@ function ProductDetailed(props) {
 
     const handleClick = (type) => {
         if (type === 'checkout') {
-            props.history.push('/checkout');
+            if (isAuthenticated) {
+                props.history.push('/checkout');
+            } else {
+                toaster('Please login to continue', 3000, 'error');
+            }
         } else {
             handleAddProduct();
         }
@@ -214,7 +219,11 @@ function ProductDetailed(props) {
                             <WhatsappIcon size={55} round={true} />
                         </WhatsappShareButton>
                     </div>
-                    <BottomMobilePrice price={product.price} />
+                    <BottomMobilePrice
+                        price={product.price}
+                        isInCart={isInCart(product)}
+                        handleClick={handleClick}
+                    />
                 </div>
             ) : (
                 <FullPageLoader />
