@@ -49,7 +49,7 @@ function Checkout(props) {
 
         makePayment({
             line_items,
-            success_url: `${baseURL}/account?menu=orders`,
+            success_url: `${baseURL}/account?menu=orders&checkout=true`,
             cancel_url: `${baseURL}/checkout`,
             address: deliveryAddress,
         })
