@@ -8,13 +8,23 @@ import firebase from 'firebase';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import { baseURL } from '../../../services/api/config';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function Checkout(props) {
     const { cartItems, total = 0, clearCart } = useContext(CartContext);
     const [isLoading, setIsLoading] = useState(false);
+    const [deliveryAddress, setDeliveryAddress] = useState('');
+
     const { t } = useTranslation();
     const isAuthenticated = localStorage.userDetails;
+
+    useEffect(() => {
+        // redirect to home if the user isnt logged in
+        if (!localStorage.userDetails) {
+            props.history.push('/');
+        }
+    }, []);
 
     const handlePayment = () => {
         setIsLoading(true);
@@ -41,6 +51,7 @@ function Checkout(props) {
             line_items,
             success_url: `${baseURL}/account?menu=orders`,
             cancel_url: `${baseURL}/checkout`,
+            address: deliveryAddress,
         })
             .then((res) => {
                 setIsLoading(false);
@@ -53,6 +64,10 @@ function Checkout(props) {
             });
     };
 
+    const handleAddressSelect = (address) => {
+        console.log(address);
+        setDeliveryAddress(address.text);
+    };
     useEffect(() => {
         document.title = 'Checkout | HyGenie';
     }, []);
@@ -75,7 +90,10 @@ function Checkout(props) {
                                         {t('shipping_text')} {t('address_text')}
                                     </h5>
                                     <div className="checkout-page_wrapper_addresses">
-                                        <Addresses />
+                                        <Addresses
+                                            target="checkout"
+                                            onSelect={handleAddressSelect}
+                                        />
                                     </div>
                                 </div>
                                 {/* Cart items */}
@@ -132,4 +150,4 @@ function Checkout(props) {
     );
 }
 
-export default Checkout;
+export default withRouter(Checkout);

@@ -2,6 +2,7 @@ import { Steps } from 'antd';
 import './orderHistory.scss';
 import { Link } from 'react-router-dom';
 import Divider from '../../shared/Divider/Divider';
+import { getFormattedDate } from '../../../helper/Utils';
 
 const { Step } = Steps;
 
@@ -34,7 +35,7 @@ export default function OrderHistory(props) {
                             Order id : <span>{order.id}</span>
                         </h3>
                         <h4 className="order-history_item_date">
-                            {new Date(order.date_ordered).toLocaleString()}
+                            {getFormattedDate(new Date(order.date_ordered))}
                         </h4>
                         <div className="order-history_item_progress">
                             <Steps size="small" current={1}>

@@ -16,6 +16,8 @@ function AddressItem(props) {
         addresses,
         editMode,
         draftMode,
+        onSelect,
+        target,
     } = props;
     const { t } = useTranslation();
 
@@ -43,6 +45,9 @@ function AddressItem(props) {
         if (!addresses.length) address.default = true; // set as default address if its the only address
         setIsEditing(false);
         onUpdate(addresses);
+        if (onSelect) {
+            onSelect(addresses.find((item) => item.selected));
+        }
     };
 
     const handleChange = (e) => {
@@ -63,13 +68,23 @@ function AddressItem(props) {
 
     const handleDefaultChange = (e) => {
         const _addresses = addresses.map((address) => {
-            if (address.id === id) address.default = true;
-            else address.default = false;
+            if (address.id === id) {
+                target === 'checkout' // if addresses component is used in checkout page, use the selected address for order
+                    ? (address.selected = true)
+                    : (address.default = true);
+            } else {
+                target === 'checkout' // if addresses component is used in checkout page, use the selected address for order
+                    ? (address.selected = false)
+                    : (address.default = false);
+            }
             return address;
         });
 
         onChange(_addresses);
         onUpdate(_addresses);
+        if (onSelect) {
+            onSelect(addresses.find((item) => item.selected));
+        }
     };
 
     return (
@@ -134,6 +149,7 @@ function AddressItem(props) {
 }
 
 function Addresses(props) {
+    const { onSelect, target } = props;
     const [isNewClicked, setIsNewClicked] = useState(false);
     const [currentId, setCurrentId] = useState(null);
     const [addresses, setAddresses] = useState([]);
@@ -171,7 +187,8 @@ function Addresses(props) {
         setIsNewClicked(true);
         setCurrentId(id);
         setIsEmpty(false);
-        const newAddress = { id, text: '', default: false };
+        const isOnlyAddress = !addresses.length;
+        const newAddress = { id, text: '', default: isOnlyAddress };
         onChange([...addresses, newAddress]);
     };
 
@@ -179,7 +196,14 @@ function Addresses(props) {
         setIsNewClicked(false);
         api.address.update(addresses).then((res) => {
             getAllAddresses();
-            toaster('Addresses have been updated!', 3000, 'success');
+
+            toaster(
+                target === 'checkout'
+                    ? 'Delivery address has been updated'
+                    : 'Addresses have been updated!',
+                3000,
+                'success'
+            );
         });
     };
 
@@ -197,7 +221,11 @@ function Addresses(props) {
                         key={address.id}
                         id={address.id}
                         text={address.text}
-                        isDefault={address.default}
+                        isDefault={
+                            target === 'checkout'
+                                ? address.selected
+                                : address.default
+                        }
                         onChange={onChange}
                         onUpdate={handleUpdate}
                         onCancel={handleCancel}
@@ -208,6 +236,8 @@ function Addresses(props) {
                             currentId === address.id &&
                             isNewClicked // true when add new  is clicked
                         }
+                        onSelect={onSelect}
+                        target={target}
                     />
                 ))
             )}

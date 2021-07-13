@@ -91,3 +91,12 @@ export const sliceArray = (arr = [], start, end) => {
 export const getUniqueObjectArrayByKey = (key, array) => {
     return [...new Map(array.map((item) => [item[key], item])).values()];
 };
+
+export const getFormattedDate = (date) => {
+    date = new Date(date);
+    const day = date.getDate();
+    const month = new Date(date).toLocaleString('en-us', { month: 'short' }); //Jan
+    const year = date.getFullYear();
+
+    return `${month} ${day} ${year}`;
+};
