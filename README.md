@@ -52,6 +52,13 @@ Goals:
 - Affordable to all ranges of customers at best price.
 - Customers can order the products on the go even with their mobile device with ease.
 
+Features:
+
+- Multilingial Support
+- PWA
+- WhatsApp Share
+- Multiple Payment Option
+
 ### Built With
 
 - [React Js](https://reactjs.org/)
