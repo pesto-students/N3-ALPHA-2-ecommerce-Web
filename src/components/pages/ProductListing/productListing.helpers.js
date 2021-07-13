@@ -27,9 +27,8 @@ export function filterProducts(filters, products) {
                     : false;
             })
         );
-
-        console.log('filter', filteredProducts);
     }
+    console.log('filter', filteredProducts);
 
     return filteredProducts;
 }
