@@ -91,13 +91,13 @@ const Header = (props) => {
                     handleCartClick={handleCartClick}
                 />
                 <div className="header_login">
-                    <img
-                        src="/assets/user.png"
-                        alt="User Profile"
-                        className="header_login-icon"
-                    />
                     {userDetails ? (
                         <Fragment>
+                            <img
+                                src="/assets/user.png"
+                                alt="User Profile"
+                                className="header_login-icon"
+                            />
                             <span className="header_login-text">
                                 {' '}
                                 {t('profile_text')}
@@ -119,6 +119,11 @@ const Header = (props) => {
                             className="header_login-text"
                             onClick={() => handleLoginClick()}
                         >
+                            <img
+                                src="/assets/user.png"
+                                alt="User Profile"
+                                className="header_login-icon"
+                            />
                             {t('login')}
                         </span>
                     )}

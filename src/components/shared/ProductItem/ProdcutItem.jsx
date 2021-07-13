@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './productItem.scss';
 import { CartContext } from '../Contexts/CartContext';
 import { useTranslation } from 'react-i18next';
+import SkeltonLoader from '../Loaders/SkeltonLoader';
 
 export default function ProductItem(props) {
     const [showImgLoader, setImgLoader] = useState(true);
@@ -26,11 +27,7 @@ export default function ProductItem(props) {
             <div className="product-item">
                 <Link to={`/products/${id}`} className="product-item-link">
                     {showImgLoader ? (
-                        <img
-                            src="/assets/loader.svg"
-                            className="product-item-loader"
-                            alt="Loader"
-                        />
+                        <SkeltonLoader width={'100%'} height={'10rem'} />
                     ) : (
                         <img
                             src={img}
