@@ -1,17 +1,17 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://hygenie.netlify.app/assets/logo.png" alt="Logo" width="80" height="80">
 
   <h3 align="center">HyGenie</h3>
   
   <p align="center">
     <br />
     <br />
+    ·
     <a href="https://hygenie.netlify.app/">Live URL</a>
     ·
     <a href="https://docs.google.com/document/d/115LHFTQ7zUymyhWSdZ_EssW70SuDkqPAoypAxJsYqWo">Documentation</a>
-    ·
   </p>
 </p>
 
@@ -103,6 +103,4 @@ Imthiaz Ali - [GiHub](https://github.com/imthiazSD) - imthiazdev@gmail.com
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[product-screenshot]: images/screenshot.png
-
-{"mode":"full","isActive":false}
+[product-screenshot]: https://hygenie.netlify.app/assets/hygenieScreen.png
