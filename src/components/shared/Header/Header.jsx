@@ -1,15 +1,15 @@
-import React, { Fragment, useContext } from 'react';
-import Modal from '../Modal/modal';
-import Login from './LoginForm';
-import Register from './RegisterForm';
-import Menu from './Menu';
-import { Link, withRouter } from 'react-router-dom';
 import qs from 'query-string';
-import { CartContext } from '../Contexts/CartContext';
-import CartDetail from './CartDetail';
-import { getLocalStorage } from '../../../helper/Utils';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, withRouter } from 'react-router-dom';
+import { getLocalStorage } from '../../../helper/Utils';
+import { CartContext } from '../Contexts/CartContext';
+import Modal from '../Modal/modal';
+import CartDetail from './CartDetail';
 import LanguageSwitch from './LanguageSwitch';
+import Login from './LoginForm';
+import Menu from './Menu';
+import Register from './RegisterForm';
 
 const Header = (props) => {
     const { cartItems = [] } = useContext(CartContext);
@@ -36,16 +36,32 @@ const Header = (props) => {
         handleCartClick,
     } = props;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const searchQuery = formData.get('search');
+    const [searchString, setSearchString] = useState('');
+
+    useEffect(() => {
+        const { search } = qs.parse(window.location.search);
+        setSearchString(search);
+    }, [window.location.search]);
+
+    const searchProducts = (searchQuery) => {
         const queryParams = qs.parse(props.location.search);
         const newQueryParam = {
             ...queryParams,
             search: searchQuery,
         };
         props.history.push(`/products?${qs.stringify(newQueryParam)}`);
+    };
+
+    const handleInputChange = (e) => {
+        const { value } = e.target;
+        searchProducts(value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const searchQuery = formData.get('search');
+        searchProducts(searchQuery);
     };
 
     return (
@@ -70,6 +86,8 @@ const Header = (props) => {
                         className="header_search"
                         type="text"
                         placeholder={t('search_placeholder')}
+                        onChange={handleInputChange}
+                        value={searchString}
                     />
                 </form>
                 <LanguageSwitch />

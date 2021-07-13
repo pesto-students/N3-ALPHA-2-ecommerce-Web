@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import Divider from '../../shared/Divider/Divider';
 import Filters from '../../shared/Filters/Filters';
 import ProductItem from '../../shared/ProductItem/ProdcutItem';
@@ -9,21 +9,23 @@ import qs from 'query-string';
 import './productListing.scss';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import { capitalizeFirstLetter } from '../../../helper/Utils';
+import { debounce } from 'lodash';
 
 function Products(props) {
     const allProducts = useGetAllPRoducts();
     const [products, setProducts] = useState(allProducts);
     const [category, setCategory] = useState('all');
     const [isLoading, setIsLoading] = useState(false);
+    const [search, setSearch] = useState('');
 
     /* filter products based on category from url query params*/
     useEffect(() => {
         if (props.location.search) {
             const { category, search } = qs.parse(props.location.search);
-            console.log('QUERY', category, search);
             if (category) {
                 setCategory(category);
-                setProducts(filterProducts({ category, search }, allProducts));
+                setSearch(search);
+                setFilteredProducts({ category, search }, allProducts);
             }
         }
     }, [props.location.search]);
@@ -32,14 +34,23 @@ function Products(props) {
         setIsLoading(false);
     }, [products]);
 
-    const handleFiltersChange = (filters) => {
-        setIsLoading(true);
-        setProducts(filterProducts(filters, allProducts));
-    };
-
     useEffect(() => {
         document.title = 'HyGenie : Stay Home Stay Safe';
     }, []);
+
+    const handleFiltersChange = (filters) => {
+        // setIsLoading(true);
+        setFilteredProducts({ ...filters, category, search }, allProducts);
+    };
+
+    const filterProductsHandler = (filters, products) => {
+        setProducts(filterProducts(filters, products));
+    };
+
+    const setFilteredProducts = useCallback(
+        debounce(filterProductsHandler, 200),
+        []
+    );
 
     return (
         <Fragment>
