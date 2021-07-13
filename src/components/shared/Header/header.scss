@@ -47,10 +47,11 @@
         width: 4%;
         &-icon {
             max-width: 24px;
+            display: block;
+            margin: auto;
         }
         &-text {
             font-weight: bold;
-            padding-left: 6px;
             font-size: 0.8rem;
             display: block;
         }
@@ -143,6 +144,7 @@
         font-weight: bold;
         cursor: pointer;
         width: 4%;
+        padding-right: 6px;
         &-icon {
             max-width: 24px;
         }
@@ -239,6 +241,25 @@
     }
 }
 
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .loginOverlay_modal {
+        right: 7rem;
+    }
+}
+@media only screen and (min-width: 1400px) and (max-width: 1500px) {
+    .loginOverlay_modal {
+        right: 10rem;
+    }
+}
+@media only screen and (min-width: 1500px) {
+    .react-responsive-modal-overlay.loginOverlay {
+        background: #00000080;
+    }
+    .loginOverlay_modal {
+        right: 40%;
+        top: 35%;
+    }
+}
 // desktop and ipad pro
 @media only screen and (min-width: $mediaLaptopMin) and (max-width: $mediaLaptopMax) {
     .header {

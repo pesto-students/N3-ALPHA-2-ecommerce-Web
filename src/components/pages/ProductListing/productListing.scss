@@ -5,10 +5,9 @@
     margin-top: $topSpacing;
 
     &_header {
-
-        h3{
+        h3 {
             float: left;
-            font-size:18px;
+            font-size: 18px;
             font-weight: bold;
         }
         p {
@@ -20,19 +19,18 @@
         margin-top: 40px;
         display: flex;
 
-        &_empty{
+        &_empty {
             width: 100%;
 
-            &_content{
+            &_content {
                 width: 100%;
                 max-width: 400px;
-                h3{
+                h3 {
                     font-size: 18px;
                     font-weight: bold;
                 }
-                img{
+                img {
                     margin-top: 20px;
-
                 }
             }
             display: flex;
