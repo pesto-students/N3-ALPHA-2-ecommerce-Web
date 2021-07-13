@@ -5,6 +5,11 @@
     margin-top: $topSpacing;
 
     &_header {
+        h3 {
+            float: left;
+            font-size: 18px;
+            font-weight: bold;
+        }
         p {
             margin-bottom: 16px;
         }
@@ -13,6 +18,25 @@
     &_section {
         margin-top: 40px;
         display: flex;
+
+        &_empty {
+            width: 100%;
+
+            &_content {
+                width: 100%;
+                max-width: 400px;
+                h3 {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                img {
+                    margin-top: 20px;
+                }
+            }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     &_list {
