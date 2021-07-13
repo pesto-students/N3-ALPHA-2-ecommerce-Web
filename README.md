@@ -1,13 +1,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="https://hygenie.netlify.app/assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://hygenie.netlify.app/assets/logo.png" alt="Logo" width="200" >
 
-  <h3 align="center">HyGenie</h3>
-  
   <p align="center">
-    <br />
-    <br />
     ·
     <a href="https://hygenie.netlify.app/">Live URL</a>
     ·
@@ -32,7 +28,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact">Contributers</a></li>
   </ol>
 </details>
 
@@ -92,9 +88,9 @@ Following are the simple steps to run this project.
    ```
 4. Open http://localhost:3000 to view it in the browser
 
-<!-- CONTACT -->
+<!-- Contributers -->
 
-## Contact
+## Contributers
 
 Rohit Ranjan - [GiHub](https://github.com/rodeveloper9) - rohitdeveloper9@gmail.com
 
