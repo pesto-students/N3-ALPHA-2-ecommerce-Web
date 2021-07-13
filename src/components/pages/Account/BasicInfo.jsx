@@ -17,7 +17,7 @@ const BasicInfo = () => {
                 <span className="basicInfo_info_value">{email}</span>
             </p>
             <p className="basicInfo_info">
-                <span className="basicInfo_info_label">Manage Address</span>
+                <span className="basicInfo_info_label">Address</span>
                 <span className="basicInfo_info_value">
                     <Addresses />
                 </span>
