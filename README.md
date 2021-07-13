@@ -28,7 +28,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#contact">Contributers</a></li>
+    <li><a href="#contributers">Contributers</a></li>
   </ol>
 </details>
 
