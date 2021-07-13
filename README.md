@@ -26,6 +26,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#production">Production</a></li>
       </ul>
     </li>
     <li><a href="#contributers">Contributers</a></li>
@@ -94,6 +95,13 @@ Following are the simple steps to run this project.
    npm start
    ```
 4. Open http://localhost:3000 to view it in the browser
+
+### Production
+
+1. Build
+   ```sh
+   npm run build
+   ```
 
 <!-- Contributers -->
 
