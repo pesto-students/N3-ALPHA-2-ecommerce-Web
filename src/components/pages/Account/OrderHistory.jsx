@@ -31,7 +31,7 @@ function OrderHistory(props) {
                         alt="orders empty state"
                     />
                     <div className="order-history_empty-state_text">
-                        <p> You have no orders yet</p>
+                        <p> You have made no orders yet</p>
                         <Link
                             to="/products?category=all"
                             className="cartDetail_checkoutBtn"
