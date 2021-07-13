@@ -22,6 +22,9 @@ function AddressItem(props) {
     const { t } = useTranslation();
 
     const [isEditing, setIsEditing] = useState(false);
+    useEffect(() => {
+        console.log(props);
+    });
 
     useEffect(() => setIsEditing(editMode), [editMode]);
 
@@ -67,6 +70,7 @@ function AddressItem(props) {
     };
 
     const handleDefaultChange = (e) => {
+        console.log('DEFAULT');
         const _addresses = addresses.map((address) => {
             if (address.id === id) {
                 target === 'checkout' // if addresses component is used in checkout page, use the selected address for order
@@ -172,7 +176,7 @@ function Addresses(props) {
             });
             if (!addresses.length) setIsEmpty(true); // Prompt user to add address if there are none
             setAddresses(addresses);
-            setDefaultAddresses(JSON.parse(JSON.stringify(addresses))); // keep a copy to undo chanegs when cancel is clicked
+            setDefaultAddresses(JSON.parse(JSON.stringify(addresses))); // keep a copy to undo changes when cancel is clicked
         } catch (err) {
             console.log(err);
         }
@@ -183,12 +187,12 @@ function Addresses(props) {
     };
 
     const handleAddNew = () => {
-        const id = addresses.length;
+        const id = addresses.length.toString();
         setIsNewClicked(true);
         setCurrentId(id);
         setIsEmpty(false);
         const isOnlyAddress = !addresses.length;
-        const newAddress = { id, text: '', default: isOnlyAddress };
+        const newAddress = { id, text: '', default: isOnlyAddress }; // set address as default if its the only address
         onChange([...addresses, newAddress]);
     };
 
@@ -230,11 +234,15 @@ function Addresses(props) {
                         onUpdate={handleUpdate}
                         onCancel={handleCancel}
                         addresses={addresses}
-                        editMode={currentId && currentId === address.id}
+                        editMode={Boolean(
+                            currentId && currentId === address.id
+                        )}
                         draftMode={
-                            currentId &&
-                            currentId === address.id &&
-                            isNewClicked // true when add new  is clicked
+                            Boolean(
+                                currentId &&
+                                    currentId === address.id &&
+                                    isNewClicked
+                            ) // true when add new  is clicked
                         }
                         onSelect={onSelect}
                         target={target}
