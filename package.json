@@ -13,6 +13,7 @@
     "i18next": "^20.3.2",
     "i18next-browser-languagedetector": "^6.1.2",
     "i18next-xhr-backend": "^3.2.2",
+    "lodash.debounce": "^4.0.8",
     "node-sass": "^6.0.0",
     "prettier": "^2.3.1",
     "pretty-quick": "^3.1.1",
