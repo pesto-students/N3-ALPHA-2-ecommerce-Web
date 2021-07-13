@@ -9,13 +9,16 @@
     right: 0;
     background: $white;
     overflow-x: hidden;
-    transition: all 0.5s;
     box-shadow: 1px 1px 10px -1px $grey-aaa;
+    transition: transform 0.6s cubic-bezier(0, 0.52, 0, 1);
+
     &.hide {
         width: 0;
+        transform: translate3d(100vw, 0, 0);
     }
     &.show {
         width: 40%;
+        transform: translate3d(0, 0, 0);
         padding: 16px;
         border-radius: 0 0 $borderRadius $borderRadius;
         .cartDetail_top {
@@ -103,6 +106,7 @@
         font-weight: bold;
         cursor: pointer;
         margin: 0;
+        color: $primary-color;
         &:hover {
             color: $primary-color;
         }

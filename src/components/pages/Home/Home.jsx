@@ -10,7 +10,7 @@ const Home = () => {
     const recomended = getSessionStorage('recomended') || [];
     const { t } = useTranslation();
     useEffect(() => {
-        document.title = 'HyGenie : Stay Home Stay Safe';
+        document.title = 'HyGenie | Stay Home Stay Safe';
     }, []);
     return (
         <Fragment>

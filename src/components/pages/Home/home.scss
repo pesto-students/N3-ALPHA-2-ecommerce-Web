@@ -3,6 +3,8 @@
 // Banner
 .banner {
     position: relative;
+    max-width: 1600px;
+    margin: auto;
     &_img {
         width: 100%;
         max-width: 1600px;

@@ -40,18 +40,19 @@ const CartItem = ({ product }) => {
                                 onClick={() => removeProduct(product)}
                                 title="Remove Product"
                             >
-                                X
+                                <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         )}
                     </p>
                 </div>
                 <p className="cartItem_price">&#8377; {quantity * price}.00</p>
-                <p
-                    className="cartItem_remove"
+                <button
+                    className="cartItem_btn"
                     onClick={() => removeProduct(product)}
+                    title="Remove Product"
                 >
-                    {t('remove_text')}
-                </p>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
             </div>
         </Fragment>
     );

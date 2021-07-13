@@ -40,7 +40,7 @@ const CartDetail = ({ isCartOpen = false, handleCartClick }) => {
                         className="cartDetail_closeBtn"
                         onClick={(e) => handleCartClick(e)}
                     >
-                        ×{' '}
+                        ×
                     </p>
                 </div>
                 {cartItems.length > 0 ? (
