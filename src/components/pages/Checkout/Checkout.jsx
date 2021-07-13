@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import CartItem from '../../shared/Header/CartItem';
 import '../../shared/Header/cart.scss';
 import { CartContext } from '../../shared/Contexts/CartContext';
@@ -8,11 +8,21 @@ import firebase from 'firebase';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
 import { baseURL } from '../../../services/api/config';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 
 function Checkout(props) {
     const { cartItems, total = 0 } = useContext(CartContext);
     const [isLoading, setIsLoading] = useState(false);
+    const [deliveryAddress, setDeliveryAddress] = useState('');
+
     const { t } = useTranslation();
+
+    useEffect(() => {
+        // redirect to home if the user isnt logged in
+        if (!localStorage.userDetails) {
+            props.history.push('/');
+        }
+    }, []);
 
     const handlePayment = () => {
         setIsLoading(true);
@@ -39,6 +49,7 @@ function Checkout(props) {
             line_items,
             success_url: `${baseURL}/account?menu=orders`,
             cancel_url: `${baseURL}/checkout`,
+            address: deliveryAddress,
         })
             .then((res) => {
                 setIsLoading(false);
@@ -49,6 +60,11 @@ function Checkout(props) {
                 setIsLoading(false);
                 console.log(err);
             });
+    };
+
+    const handleAddressSelect = (address) => {
+        console.log(address);
+        setDeliveryAddress(address.text);
     };
 
     return (
@@ -68,7 +84,10 @@ function Checkout(props) {
                                 {t('shipping_text')} {t('address_text')}
                             </h5>
                             <div className="checkout-page_wrapper_addresses">
-                                <Addresses />
+                                <Addresses
+                                    target="checkout"
+                                    onSelect={handleAddressSelect}
+                                />
                             </div>
                         </div>
                         {/* Cart items */}
@@ -105,4 +124,4 @@ function Checkout(props) {
     );
 }
 
-export default Checkout;
+export default withRouter(Checkout);
