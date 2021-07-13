@@ -8,10 +8,12 @@ import { withRouter } from 'react-router-dom';
 import qs from 'query-string';
 import './productListing.scss';
 import FullPageLoader from '../../shared/Loaders/FullPageLoader';
+import { capitalizeFirstLetter } from '../../../helper/Utils';
 
 function Products(props) {
     const allProducts = useGetAllPRoducts();
     const [products, setProducts] = useState(allProducts);
+    const [category, setCategory] = useState('all');
 
     /* filter products based on category from url query params*/
     useEffect(() => {
@@ -19,6 +21,7 @@ function Products(props) {
             const { category, search } = qs.parse(props.location.search);
             console.log('QUERY', category, search);
             if (category) {
+                setCategory(category);
                 setProducts(filterProducts({ category, search }, allProducts));
             }
         }
@@ -34,16 +37,17 @@ function Products(props) {
 
     useEffect(() => {
         document.title = 'HyGenie : Stay Home Stay Safe';
-    });
+    }, []);
 
     return (
         <Fragment>
             {products.length > 0 ? (
                 <div className="products">
                     <div className="products_header">
+                        <h3>{capitalizeFirstLetter(category)}</h3>
                         <p align="right">{`${products.length} items`}</p>
-                        <Divider />
                     </div>
+                    <Divider />
                     <section className="products_section">
                         <Filters onFiltersChange={handleFiltersChange} />
                         <div className="products_list">
