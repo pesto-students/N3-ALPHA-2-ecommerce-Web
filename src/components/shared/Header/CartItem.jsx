@@ -47,7 +47,7 @@ const CartItem = ({ product }) => {
                 </div>
                 <p className="cartItem_price">&#8377; {quantity * price}.00</p>
                 <button
-                    className="cartItem_btn"
+                    className="cartItem_btn remove"
                     onClick={() => removeProduct(product)}
                     title="Remove Product"
                 >

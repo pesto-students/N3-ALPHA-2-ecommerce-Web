@@ -39,6 +39,13 @@
 
         &_form {
             width: 32%;
+            position: relative;
+            &_icon {
+                position: absolute;
+                right: 10px;
+                top: 16px;
+                color: $grey-bbb;
+            }
         }
     }
     &_login {
@@ -167,6 +174,7 @@
     width: 100%;
     min-width: 100px;
     display: none;
+    z-index: 2;
     &_item {
         display: inline-block;
         width: 100%;
@@ -447,10 +455,17 @@
             }
             &_search {
                 display: block;
+                position: relative;
                 &_input {
                     @include formField;
                     @include sectionWidth;
                     padding: 6px 12px;
+                }
+                &_icon {
+                    position: absolute;
+                    right: 20px;
+                    top: 10px;
+                    color: $grey-bbb;
                 }
             }
         }

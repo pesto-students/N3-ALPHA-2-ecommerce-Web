@@ -89,6 +89,7 @@ const Header = (props) => {
                         onChange={handleInputChange}
                         value={searchString}
                     />
+                    <i class="fas fa-search header_search_form_icon"></i>
                 </form>
                 <LanguageSwitch />
                 <div
@@ -180,7 +181,10 @@ const Header = (props) => {
                     className="mobileMenu_search_input"
                     type="text"
                     placeholder={t('search_placeholder')}
+                    onChange={handleInputChange}
+                    value={searchString}
                 />
+                <i class="fas fa-search mobileMenu_search_icon"></i>
             </form>
         </header>
     );

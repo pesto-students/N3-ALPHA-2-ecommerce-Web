@@ -35,7 +35,7 @@ function Products(props) {
     }, [products]);
 
     useEffect(() => {
-        document.title = 'HyGenie : Stay Home Stay Safe';
+        document.title = 'HyGenie | Stay Home Stay Safe';
     }, []);
 
     const handleFiltersChange = (filters) => {
