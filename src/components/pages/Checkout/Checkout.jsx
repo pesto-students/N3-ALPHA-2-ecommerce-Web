@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toaster } from '../../../helper/Utils';
+import address from '../../../services/api/address';
 
 function Checkout(props) {
     const { cartItems, total = 0, clearCart } = useContext(CartContext);
@@ -31,6 +32,10 @@ function Checkout(props) {
     const handlePayment = () => {
         if (!isAuthenticated) {
             toaster('Please login to continue', 3000, 'error');
+            return;
+        }
+        if (!deliveryAddress) {
+            toaster('No delivery address has been set', 3000, 'error');
             return;
         }
         setIsLoading(true);
@@ -72,8 +77,17 @@ function Checkout(props) {
     };
 
     const handleAddressSelect = (address) => {
-        console.log(address);
         setDeliveryAddress(address.text);
+    };
+
+    const handleAddressUpdate = (addresses) => {
+        // if selected address doesnt exist in the updated addresses set delivery address to empty
+        // This handles cases where an address is set as delivery address and then deleted
+        const addressExists = addresses.some(
+            (address) => address.text === deliveryAddress
+        );
+
+        if (!addressExists) setDeliveryAddress('');
     };
 
     return (
@@ -95,6 +109,7 @@ function Checkout(props) {
                                 <Addresses
                                     target="checkout"
                                     onSelect={handleAddressSelect}
+                                    onUpdate={handleAddressUpdate}
                                 />
                             </div>
                         </div>

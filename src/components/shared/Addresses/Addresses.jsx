@@ -153,7 +153,7 @@ function AddressItem(props) {
 }
 
 function Addresses(props) {
-    const { onSelect, target } = props;
+    const { onSelect, target, onUpdate } = props;
     const [isNewClicked, setIsNewClicked] = useState(false);
     const [currentId, setCurrentId] = useState(null);
     const [addresses, setAddresses] = useState([]);
@@ -166,6 +166,8 @@ function Addresses(props) {
     useEffect(() => {
         getAllAddresses();
     }, []);
+
+    useEffect(() => onUpdate(addresses), [addresses, onUpdate]);
 
     const getAllAddresses = async () => {
         try {
@@ -199,7 +201,12 @@ function Addresses(props) {
         setCurrentId(id);
         setIsEmpty(false);
         const isOnlyAddress = !addresses.length;
-        const newAddress = { id, text: '', default: isOnlyAddress }; // set address as default if its the only address
+        const newAddress = {
+            id,
+            text: '',
+            default: isOnlyAddress,
+            selected: isOnlyAddress,
+        }; // set address as default if its the only address
         onChange([...addresses, newAddress]);
     };
 
