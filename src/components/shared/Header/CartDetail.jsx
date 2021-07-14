@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useEffect } from 'react';
+import React, { useContext, Fragment, useEffect, useState } from 'react';
 import CartItem from './CartItem';
 import './cart.scss';
 import { CartContext } from '../Contexts/CartContext';
@@ -22,11 +22,18 @@ const CartDetail = ({ isCartOpen = false, handleCartClick }) => {
                         ...(remoteCart || []),
                     ]);
 
-                    syncCart(combinedCart);
+                    /* update cart only if local and remote cart items differ */
+                    if (
+                        JSON.stringify(cartItems) !==
+                        JSON.stringify(combinedCart)
+                    ) {
+                        syncCart(combinedCart);
+                    }
                 });
             }
         });
-    }, []);
+    }, [cartItems]);
+
     const { t } = useTranslation();
 
     return (
