@@ -167,7 +167,11 @@ function Addresses(props) {
         getAllAddresses();
     }, []);
 
-    useEffect(() => onUpdate(addresses), [addresses, onUpdate]);
+    useEffect(() => {
+        if (onUpdate) {
+            onUpdate(addresses);
+        }
+    }, [addresses, onUpdate]);
 
     const getAllAddresses = async () => {
         try {
