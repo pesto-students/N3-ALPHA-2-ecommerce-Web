@@ -6,6 +6,7 @@ import './orderHistory.scss';
 import { useEffect, useContext } from 'react';
 import qs from 'query-string';
 import { CartContext } from '../../shared/Contexts/CartContext';
+import { Collapse, Space } from 'antd';
 
 const { Step } = Steps;
 
@@ -20,6 +21,8 @@ function OrderHistory(props) {
             clearCart();
         }
     }, [clearCart]);
+
+    const { Panel } = Collapse;
 
     return (
         <div className="order-history">
@@ -44,7 +47,7 @@ function OrderHistory(props) {
                 orders.map((order) => (
                     <div className="order-history_item">
                         <h3>
-                            Order id : <span>{order.id}</span>
+                            Order ID : <span>{order.id}</span>
                         </h3>
                         <h4 className="order-history_item_date">
                             {getFormattedDate(new Date(order.date_ordered))}
@@ -56,23 +59,41 @@ function OrderHistory(props) {
                                 <Step title="Delivered" />
                             </Steps>
                         </div>
+
                         <div className="order-history_item_products">
-                            {order.products.map((product) => (
-                                <div className="order-history_item_products_item">
-                                    <Link to={`/products/${product.id}`}>
-                                        <img
-                                            className="order-history_item_products_item_image"
-                                            src={product.img}
-                                            alt={product.name}
-                                        />
-                                    </Link>
-                                    <h4 className="order-history_item_products_item_title">
-                                        {product.name}
-                                    </h4>
-                                </div>
-                            ))}
+                            <Collapse>
+                                <Panel
+                                    header={
+                                        order && (
+                                            <span>
+                                                View all
+                                                <strong>
+                                                    {` ${order.products.length} `}
+                                                </strong>
+                                                items
+                                            </span>
+                                        )
+                                    }
+                                >
+                                    {order.products.map((product) => (
+                                        <div className="order-history_item_products_item">
+                                            <Link
+                                                to={`/products/${product.id}`}
+                                            >
+                                                <img
+                                                    className="order-history_item_products_item_image"
+                                                    src={product.img}
+                                                    alt={product.name}
+                                                />
+                                            </Link>
+                                            <h4 className="order-history_item_products_item_title">
+                                                {product.name}
+                                            </h4>
+                                        </div>
+                                    ))}
+                                </Panel>
+                            </Collapse>
                         </div>
-                        <Divider />
                     </div>
                 ))
             )}
