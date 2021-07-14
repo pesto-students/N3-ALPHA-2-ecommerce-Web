@@ -41,7 +41,7 @@ const Header = (props) => {
     useEffect(() => {
         const { search } = qs.parse(window.location.search);
         setSearchString(search);
-    }, [window.location.search]);
+    }, [props.location.search]);
 
     const searchProducts = (searchQuery) => {
         const queryParams = qs.parse(props.location.search);

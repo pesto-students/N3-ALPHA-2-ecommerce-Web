@@ -115,6 +115,9 @@ function Checkout(props) {
                         </div>
                         {/* Cart items */}
                         <div className="checkout-page_wrapper_cart">
+                            <h5 className="checkout-page_subheading">
+                                {t('cart')}
+                            </h5>
                             <div className="cartDetail">
                                 <div className="cartDetail_content">
                                     {cartItems.length > 0 ? (
