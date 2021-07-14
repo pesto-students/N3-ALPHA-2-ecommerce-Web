@@ -1,12 +1,10 @@
-import { Steps } from 'antd';
+import { Collapse, Steps } from 'antd';
+import qs from 'query-string';
+import { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { getFormattedDate } from '../../../helper/Utils';
-import Divider from '../../shared/Divider/Divider';
-import './orderHistory.scss';
-import { useEffect, useContext } from 'react';
-import qs from 'query-string';
 import { CartContext } from '../../shared/Contexts/CartContext';
-import { Collapse, Space } from 'antd';
+import './orderHistory.scss';
 
 const { Step } = Steps;
 
