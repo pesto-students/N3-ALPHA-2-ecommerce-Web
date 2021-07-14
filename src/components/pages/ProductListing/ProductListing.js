@@ -18,17 +18,33 @@ function Products(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState('');
 
-    /* filter products based on category from url query params*/
+    const filterProductsHandler = (filters, products) => {
+        console.log('FILTER');
+        setProducts(filterProducts(filters, products));
+    };
+
+    const setFilteredProducts = useCallback(
+        debounce(filterProductsHandler, 200),
+        []
+    );
+
     useEffect(() => {
         if (props.location.search) {
             const { category, search } = qs.parse(props.location.search);
             if (category) {
                 setCategory(category);
-                setSearch(search);
-                setFilteredProducts({ category, search }, allProducts);
             }
+            if (search) {
+                setSearch(search);
+            }
+            setFilteredProducts({ category, search }, allProducts);
         }
-    }, [props.location.search]);
+    }, [
+        allProducts,
+        props.location,
+        props.location.search,
+        setFilteredProducts,
+    ]);
 
     useEffect(() => {
         setIsLoading(false);
@@ -42,15 +58,6 @@ function Products(props) {
         // setIsLoading(true);
         setFilteredProducts({ ...filters, category, search }, allProducts);
     };
-
-    const filterProductsHandler = (filters, products) => {
-        setProducts(filterProducts(filters, products));
-    };
-
-    const setFilteredProducts = useCallback(
-        debounce(filterProductsHandler, 200),
-        []
-    );
 
     return (
         <Fragment>
