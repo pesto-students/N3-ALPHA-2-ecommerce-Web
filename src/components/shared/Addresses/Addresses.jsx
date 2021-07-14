@@ -161,6 +161,8 @@ function Addresses(props) {
     const { t } = useTranslation();
     const [isEmpty, setIsEmpty] = useState(false);
 
+    const isAuthenticated = localStorage.userDetails;
+
     useEffect(() => {
         getAllAddresses();
     }, []);
@@ -187,6 +189,11 @@ function Addresses(props) {
     };
 
     const handleAddNew = () => {
+        if (!isAuthenticated) {
+            toaster('Please login to continue', 3000, 'error');
+            return;
+        }
+
         const id = addresses.length.toString();
         setIsNewClicked(true);
         setCurrentId(id);
