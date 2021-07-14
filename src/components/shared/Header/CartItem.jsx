@@ -25,24 +25,18 @@ const CartItem = ({ product }) => {
                             +
                         </button>
                         <span className="cartItem_qty">{quantity}</span>
-                        {quantity > 1 && (
-                            <button
-                                className="cartItem_btn"
-                                onClick={() => decrease(product)}
-                                title="Decrease Quantity"
-                            >
-                                -
-                            </button>
-                        )}
-                        {quantity === 1 && (
-                            <button
-                                className="cartItem_btn"
-                                onClick={() => removeProduct(product)}
-                                title="Remove Product"
-                            >
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        )}
+
+                        <button
+                            className="cartItem_btn"
+                            onClick={() =>
+                                quantity > 1
+                                    ? decrease(product)
+                                    : removeProduct(product)
+                            }
+                            title="Decrease Quantity"
+                        >
+                            -
+                        </button>
                     </p>
                 </div>
                 <p className="cartItem_price">&#8377; {quantity * price}.00</p>
