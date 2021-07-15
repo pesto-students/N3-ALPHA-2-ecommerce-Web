@@ -196,8 +196,14 @@
     position: relative;
     cursor: pointer;
     &_icon {
-        width: 30px;
-        padding-bottom: 10px;
+        width: 28px;
+        display: block;
+    }
+    &_text {
+        font-size: 0.8rem;
+        display: block;
+        font-weight: bold;
+        text-transform: capitalize;
     }
     &_drop {
         display: none;
