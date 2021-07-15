@@ -111,17 +111,17 @@ Following are the simple steps to run this project.
    ```
 2. Set environment variables
    ```sh
-   firebase functions:config:set stripe.secret_key=YOUR_SECRET_KEY
+   firebase functions:config:set stripe.secret_key=YOUR_STRIPE_SECRET_KEY
    ```
 ### Production
 
 1. Build
    ```sh
-   npm run build
+   cd hygenie/client && npm run build
    ```
 2. Deploy cloud functions
    ```sh
-   firebase deploy --only functions
+   cd hygenie/server/cloud-functions && firebase deploy --only functions
    ```
 <!-- Contributers -->
 
