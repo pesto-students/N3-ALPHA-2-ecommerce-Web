@@ -80,15 +80,22 @@ Following are the simple steps to run this project.
   npm install npm@latest -g
   ```
 
+- firebase
+  ```sh
+  npm install firebase -g
+  ```
+
 ### Installation
+
+#### Frontend
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/pesto-students/N3-ALPHA-2-ecommerce-Web.git
+   git clone https://github.com/pesto-students/N3-ALPHA-2-ecommerce-Web.git hygenie
    ```
 2. Install NPM packages
    ```sh
-   npm install
+   cd hygenie/client && npm install
    ```
 3. Run
    ```sh
@@ -96,20 +103,33 @@ Following are the simple steps to run this project.
    ```
 4. Open http://localhost:3000 to view it in the browser
 
+#### Backend
+
+1. Install NPM packages
+   ```sh
+   cd hygenie/server && npm install
+   ```
+2. Set environment variables
+   ```sh
+   firebase functions:config:set stripe.secret_key=YOUR_SECRET_KEY
+   ```
 ### Production
 
 1. Build
    ```sh
    npm run build
    ```
-
+2. Deploy cloud functions
+   ```sh
+   firebase deploy --only functions
+   ```
 <!-- Contributers -->
 
 ## Contributers
 
 Rohit Ranjan - [GiHub](https://github.com/rodeveloper9) - rohitdeveloper9@gmail.com
 
-Imthiaz Ali - [GiHub](https://github.com/imthiazSD) - imthiazdev@gmail.com
+Muhammed Imthiaz - [GiHub](https://github.com/imthiazSD) - imthiazdev@gmail.com
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
