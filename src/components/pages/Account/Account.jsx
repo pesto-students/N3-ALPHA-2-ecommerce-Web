@@ -26,10 +26,12 @@ const Account = () => {
         /* Fetch orders */
         api.order.getAll().then((res) => {
             if (res.val()) {
-                const orders = Object.entries(res.val()).map(([key, value]) => {
-                    console.log(key, value);
-                    return { ...value, id: key };
-                });
+                const orders = Object.entries(res.val())
+                    .map(([key, value]) => {
+                        console.log(key, value);
+                        return { ...value, id: key };
+                    })
+                    .reverse();
                 console.log(orders);
                 setOrders(orders);
             }
