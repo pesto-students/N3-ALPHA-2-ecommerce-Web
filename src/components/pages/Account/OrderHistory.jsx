@@ -66,29 +66,34 @@ function OrderHistory(props) {
                                             <span>
                                                 View all
                                                 <strong>
-                                                    {` ${order.products.length} `}
+                                                    {` ${
+                                                        order.products &&
+                                                        order.products.length
+                                                    } `}
                                                 </strong>
                                                 items
                                             </span>
                                         )
                                     }
                                 >
-                                    {order.products.map((product) => (
-                                        <div className="order-history_item_products_item">
-                                            <Link
-                                                to={`/products/${product.id}`}
-                                            >
-                                                <img
-                                                    className="order-history_item_products_item_image"
-                                                    src={product.img}
-                                                    alt={product.name}
-                                                />
-                                            </Link>
-                                            <h4 className="order-history_item_products_item_title">
-                                                {product.name}
-                                            </h4>
-                                        </div>
-                                    ))}
+                                    {order &&
+                                        order.products &&
+                                        order.products.map((product) => (
+                                            <div className="order-history_item_products_item">
+                                                <Link
+                                                    to={`/products/${product.id}`}
+                                                >
+                                                    <img
+                                                        className="order-history_item_products_item_image"
+                                                        src={product.img}
+                                                        alt={product.name}
+                                                    />
+                                                </Link>
+                                                <h4 className="order-history_item_products_item_title">
+                                                    {product.name}
+                                                </h4>
+                                            </div>
+                                        ))}
                                 </Panel>
                             </Collapse>
                         </div>
