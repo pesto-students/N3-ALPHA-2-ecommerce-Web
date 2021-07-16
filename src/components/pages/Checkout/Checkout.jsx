@@ -77,12 +77,25 @@ function Checkout(props) {
     };
 
     const handleAddressSelect = (address) => {
+        console.log('ADDRESS');
         setDeliveryAddress(address.text);
     };
 
     const handleAddressUpdate = (addresses) => {
         // if selected address doesnt exist in the updated addresses set delivery address to empty
         // This handles cases where an address is set as delivery address and then deleted
+        if (addresses.length === 1) {
+            setDeliveryAddress(addresses[0].text);
+            return;
+        } else if (addresses.length > 1) {
+            const selectedAddress = addresses.find(
+                (address) => address.selected
+            );
+
+            if (selectedAddress) setDeliveryAddress(selectedAddress.text);
+            return;
+        }
+
         const addressExists = addresses.some(
             (address) => address.text === deliveryAddress
         );
