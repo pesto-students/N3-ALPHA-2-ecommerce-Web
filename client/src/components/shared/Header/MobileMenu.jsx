@@ -18,10 +18,10 @@ const MobileMenu = (props) => {
                 <p data-value="all" className="mobileMenu_item">
                     {t('product_all')}
                 </p>
-                <p data-value="masks" className="mobileMenu_item">
+                <p data-value="mask" className="mobileMenu_item">
                     {t('product_mask')}
                 </p>
-                <p data-value="sanitizers" className="mobileMenu_item">
+                <p data-value="sanitizer" className="mobileMenu_item">
                     {t('product_sanitizer')}
                 </p>
                 <p data-value="handwash" className="mobileMenu_item">
