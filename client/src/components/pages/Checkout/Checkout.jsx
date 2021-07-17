@@ -38,6 +38,10 @@ function Checkout(props) {
             toaster('No delivery address has been set', 3000, 'error');
             return;
         }
+        if (!cartItems.length) {
+            toaster('Your cart is empty', 3000, 'error');
+            return;
+        }
         setIsLoading(true);
 
         const makePayment = firebase
